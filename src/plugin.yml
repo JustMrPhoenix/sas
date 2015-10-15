@@ -1,0 +1,36 @@
+name: SAS
+main: my.sas.SasPlugin
+version: 1.2
+description: sas
+commands:
+   saskit:
+      description: U will get some mythical KIT
+      permission: sas.kit
+      usage: /<command> <kitname>
+   addsign:
+      permission: sas.addsign
+      usage: /<command> <kitname> <custom_permission>
+   delsign:
+      permission: sas.delsign
+      usage: /<command> <kitname>
+   addkit:
+      permission: sas.modify
+      usage: /<command> <kitname>
+   sasitem:
+      permission: sas.item.give
+      usage: /<command> <itemname>
+   sasping:
+      permission: sas.ping
+      usage: /<command>
+   sasvanish:
+      permission: sas.vanish
+      usage: /<command> [nick]
+   sasblock:
+      permission: sas.block.add
+      usage: /<command> [[command] [delay]]
+   sasunblock:
+      permission: sas.block.remove
+      usage: /<command> <cmd>
+   wild:
+      permission: sas.wild
+      usage: /<command>

@@ -1,8 +1,5 @@
 package my.sas;
 
-/**
- * Created by Mr.Phoenix on 10/4/2015.
- */
 public class Point {
 	public int x, y;
 	public Point( int x, int y ){

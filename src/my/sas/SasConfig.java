@@ -6,9 +6,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by Mr.Phoenix on 10/11/2015.
- */
 public class SasConfig{
 	private File file;
 	private String name;

@@ -10,9 +10,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-/**
- * Created by Mr.Phoenix on 9/13/2015.
- */
 public class SasPing extends SasCommandBase implements CommandExecutor {
 
     public SasPing(SasPlugin p) {

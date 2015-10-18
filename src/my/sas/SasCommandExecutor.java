@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-/**
- * Created by Mr.Phoenix on 9/13/2015.
- */
 public class SasCommandExecutor {
 
     public SasPlugin plugin;

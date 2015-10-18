@@ -25,9 +25,6 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.*;
 
-/**
- * Created by Mr.Phoenix on 9/13/2015.
- */
 public class SasVanish extends SasCommandBase implements TabCompleter {
 	private List<String> inVanish = new ArrayList<String>();
 	private Map<Player, Block> inventories = new HashMap<Player, Block>();

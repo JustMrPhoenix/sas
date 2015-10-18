@@ -24,10 +24,11 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class KitExecutor implements Listener
 {
 	public HashMap<String,Kit> kits = new HashMap<String,Kit>( );
+
 	private SasPlugin plugin;
-	ConfigurationSection config;
+	private ConfigurationSection config;
 	public KitCommandExecutor commandExecutor;
-	
+
 	public KitExecutor( SasPlugin plugin )
 	{
 		this.plugin = plugin;
@@ -36,10 +37,10 @@ public class KitExecutor implements Listener
 		plugin.getCommand( "addsign" ).setExecutor( commandExecutor );
 		plugin.getCommand( "delsign" ).setExecutor( commandExecutor );
 		plugin.getCommand( "addkit" ).setExecutor( commandExecutor );
-		plugin.getLogger( ).info( "Sas kit executor inited!");
-		if( plugin.main_config.contains( "kits" ) )
+		plugin.getLogger().info("Sas kit executor initialized.");
+		if (plugin.mainConfig.contains("kits"))
 		{
-			config = plugin.main_config.getConfigurationSection( "kits" );
+			config = plugin.mainConfig.getConfigurationSection("kits");
 			Map<String,Object> data = config.getValues( false );
 			deserialize( data );
 		}
@@ -185,7 +186,7 @@ public class KitExecutor implements Listener
 		Map<String,Object> map = serialize( );
 		if( map != null )
 		{
-			plugin.main_config.set( "kits" , map );
+			plugin.mainConfig.set( "kits" , map );
 		}
 	}
 	public void deserialize( Map<String,Object> data )

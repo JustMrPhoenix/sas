@@ -17,9 +17,6 @@ import org.bukkit.projectiles.ProjectileSource;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Mr.Phoenix on 9/14/2015.
- */
 public class AntiGodKill implements Listener {
 	Essentials ess;
 	Map<Player, Integer> warns = new HashMap<Player, Integer>();

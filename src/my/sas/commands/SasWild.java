@@ -1,6 +1,5 @@
 package my.sas.commands;
 
-import javafx.geometry.Point2D;
 import my.sas.Point;
 import my.sas.SasCommandBase;
 import my.sas.SasPlugin;
@@ -13,9 +12,6 @@ import org.bukkit.entity.Player;
 import java.util.Random;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
-/**
- * Created by Mr.Phoenix on 9/28/2015.
- */
 public class SasWild extends SasCommandBase implements CommandExecutor {
 	public WorldGuardPlugin wg;
 
@@ -60,7 +56,7 @@ public class SasWild extends SasCommandBase implements CommandExecutor {
 			c.load();
 		}
 		if ( !checkLocation(loc) || !wg.canBuild( player, loc ) || spawn.distance( loc ) < 1500 ) {
-			player.sendMessage(ChatColor.RED + "Безопасное место для телепорта не найдено!Пробуем ещё раз...");
+			player.sendMessage(ChatColor.RED + "Безопасное место для телепорта не найдено. Пробуем ещё раз...");
 			tpToRandomPos(player, try_number +1);
 			if( !loaded ){
 				c.unload();

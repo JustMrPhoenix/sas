@@ -12,8 +12,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class SasPlugin extends JavaPlugin implements Listener {
-	public FileConfiguration main_config;
-	public File main_config_file;
+	public FileConfiguration mainConfig;
+	public File mainConfigFile;
 	public FileConfiguration config;
 	public PluginManager Manager;
 	public KitExecutor kitExecutor;
@@ -25,26 +25,26 @@ public class SasPlugin extends JavaPlugin implements Listener {
 	public WorldGuardPlugin wg;
 	public SasCommandBlock sasCommandBlock;
 
-	public FileConfiguration config( ){
-		//Get/Create File
-		main_config_file = new File(getDataFolder(), "db.yml");
-		if (!main_config_file.exists()) {
+	public FileConfiguration config(){
+		mainConfigFile = new File(getDataFolder(), "db.yml");
+		if (!mainConfigFile.exists()) {
 			try {
-				main_config_file.createNewFile();
+				mainConfigFile.createNewFile();
 			} catch (IOException e) {
+				getLogger().info("Failed to create new configuration file.");
 				e.printStackTrace();
 			}
 		}
-		FileConfiguration myFileConfig = YamlConfiguration.loadConfiguration(main_config_file);
+		FileConfiguration myFileConfig = YamlConfiguration.loadConfiguration(mainConfigFile);
 		System.out.println( myFileConfig );
 		return myFileConfig;
 	}
-	//Nothing special here.U can leave
+
 	@Override
 	public void onEnable()
 	{
 		config = getConfig();
-		main_config = config();
+		mainConfig = config();
 		Manager = getServer( ).getPluginManager();
 		ess = (Essentials) Manager.getPlugin("Essentials");
 		wg = (WorldGuardPlugin) Manager.getPlugin("WorldGuard");
@@ -66,10 +66,10 @@ public class SasPlugin extends JavaPlugin implements Listener {
 	@Override
 	public void onDisable( )
 	{
-		System.out.println(main_config.toString());
+		System.out.println(mainConfig.toString());
 		kitExecutor.save();
 		try {
-			main_config.save( main_config_file );
+			mainConfig.save(mainConfigFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -1,4 +1,4 @@
-package my.sas;
+package my.sas.useless;
 
 /**
  * Created by Mr.Phoenix on 10/4/2015.

@@ -1,7 +1,6 @@
 package my.sas.commands;
 
-import javafx.geometry.Point2D;
-import my.sas.Point;
+import my.sas.useless.Point;
 import my.sas.SasCommandBase;
 import my.sas.SasPlugin;
 import org.bukkit.*;

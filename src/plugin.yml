@@ -34,3 +34,6 @@ commands:
    wild:
       permission: sas.wild
       usage: /<command>
+   sasclear:
+      permission: sas.clear
+      usage: /<command> [[player] [radius]]

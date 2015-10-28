@@ -1,4 +1,4 @@
-package my.sas;
+package my.sas.kit;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;

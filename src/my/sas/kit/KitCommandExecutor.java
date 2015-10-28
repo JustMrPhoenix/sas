@@ -1,5 +1,6 @@
-package my.sas;
+package my.sas.kit;
 
+import my.sas.SasPlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

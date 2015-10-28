@@ -28,10 +28,9 @@ public class SasCommandBlock implements Listener, CommandExecutor{
         this.plugin = plugin;
         plugin.getCommand( "sasblock" ).setExecutor( this );
         plugin.getCommand( "sasunblock" ).setExecutor( this );
-        FileConfiguration fileConfiguration = plugin.main_config;
-        if( plugin.main_config.contains( "blocks" ) )
+        if( plugin.main_config.getFileConfiguration().contains( "blocks" ) )
         {
-            config = plugin.main_config.getConfigurationSection( "blocks" );
+            config = plugin.main_config.getSection( "blocks" );
             Map<String,Object> data = config.getValues( false );
             deserialize( data );
         }
@@ -51,7 +50,7 @@ public class SasCommandBlock implements Listener, CommandExecutor{
         if( map != null )
         {
             plugin.main_config.set("blocks", map);
-            plugin.saveConfig();
+            plugin.main_config.save( );
         }
     }
 
@@ -96,9 +95,7 @@ public class SasCommandBlock implements Listener, CommandExecutor{
     }
 
     @EventHandler( priority = EventPriority.HIGHEST )
-    public void onPreprocess(PlayerCommandPreprocessEvent e) {
-        checkEvent( e );
-    }
+    public void onPreprocess(PlayerCommandPreprocessEvent e) { checkEvent( e ); }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -107,6 +104,7 @@ public class SasCommandBlock implements Listener, CommandExecutor{
                 if( strings.length == 2){
                     if( !blocks.containsKey( strings[0] ) ){
                         blocks.put(strings[0], Integer.parseInt(strings[1]));
+                        save();
                         if( commandSender instanceof Player ){
                             ( ( Player ) commandSender ).sendMessage( ChatColor.GREEN+"Добавлено!" );
                         }else{

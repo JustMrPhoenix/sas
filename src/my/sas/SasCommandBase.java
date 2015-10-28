@@ -28,11 +28,19 @@ public class SasCommandBase implements CommandExecutor, Listener {
     }
 
     protected void err(CommandSender sender, String err){
-        if( sender instanceof Player){
+        if( sender != null && sender instanceof Player){
             Player ply = ( Player ) sender;
-            ply.sendMessage( ChatColor.RED+"Œ¯Ë·Í‡!"+err );
+            ply.sendMessage( ChatColor.RED+"–û—à–∏–±–∫–∞!"+err );
         }
-        System.out.println( "["+command+"]Error!"+err );
+        System.out.println("[" + command + "]Error!" + err);
+    }
+
+    protected void msg(CommandSender sender, String msg){
+        if( sender instanceof Player){
+            ( ( Player ) sender ).sendMessage( msg );
+        }else{
+            System.out.println( msg );
+        }
     }
 
     @Override

@@ -1,9 +1,10 @@
-package my.sas;
+package my.sas.kit;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import my.sas.SasPlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -37,9 +38,9 @@ public class KitExecutor implements Listener
 		plugin.getCommand( "delsign" ).setExecutor( commandExecutor );
 		plugin.getCommand( "addkit" ).setExecutor( commandExecutor );
 		plugin.getLogger( ).info( "Sas kit executor inited!");
-		if( plugin.main_config.contains( "kits" ) )
+		if( plugin.main_config.getFileConfiguration().contains( "kits" ) )
 		{
-			config = plugin.main_config.getConfigurationSection( "kits" );
+			config = plugin.main_config.getSection( "kits" );
 			Map<String,Object> data = config.getValues( false );
 			deserialize( data );
 		}

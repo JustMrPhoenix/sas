@@ -3,8 +3,7 @@ package my.sas;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
@@ -28,6 +27,17 @@ public class ItemHandler implements Listener {
 	public Map<String, Object> items = new HashMap();
 	public Map<Player, String> plys = new HashMap();
 	public SasItemCommandExecutor executor = new SasItemCommandExecutor(this);
+	public Timer timer;
+	public TimerTask timerTask;
+
+	public void timerAction( ){
+		for( Entry<Player,String> entity : plys.entrySet() ){
+			SasItemBase base = (SasItemBase) items.get( entity.getValue()) ;
+			try{
+				base.onTimer( entity.getKey() );
+			}catch(Exception e ){}
+		}
+	}
 
 	public ItemHandler(SasPlugin plugin, ClassLoader loader) {
 		this.plugin = plugin;
@@ -49,6 +59,14 @@ public class ItemHandler implements Listener {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		timer = new Timer( );
+		timerTask = new TimerTask() {
+			@Override
+			public void run() {
+				timerAction();
+			}
+		};
+		timer.schedule( timerTask, 1000, 1000 );
 	}
 
 	public Object getItem(String name) {
@@ -86,7 +104,7 @@ public class ItemHandler implements Listener {
 			}
 		}
 		if (!found) {
-			plys.put(ply, "");
+			plys.remove( ply );
 		}
 	}
 

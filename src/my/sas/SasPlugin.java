@@ -43,6 +43,7 @@ public class SasPlugin extends JavaPlugin implements Listener {
 		Manager.registerEvents( antiGodKill, this );
 		Manager.registerEvents( sasCommandBlock, this);
 		getLogger().info( "SAS plugin activated" );
+		main_config.setAutosave( true );
 	}
 	
 	@Override

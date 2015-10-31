@@ -1,6 +1,6 @@
 package my.sas;
 
-import my.sas.SasPlugin;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,10 +8,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
+import java.util.List;
+
 /**
  * Created by Mr.Phoenix on 9/13/2015.
  */
-public class SasCommandBase implements CommandExecutor, Listener {
+public class SasCommandBase implements ISasCommandBase, Listener {
 
     protected SasPlugin plugin;
     protected String command;
@@ -43,8 +45,25 @@ public class SasCommandBase implements CommandExecutor, Listener {
         }
     }
 
+    public boolean run( CommandSender commandSender, Command command, String string, String[] strings ){
+        return false;
+    }
+
+    public List<String> tab( CommandSender commandSender, Command command, String string ,String[] strings ){
+        return null;
+    }
+
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        return false;
+        return run(commandSender, command, s, strings);
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+        if( command.getName().equals( command ) ){
+            return tab( commandSender, command, s, strings );
+        }else{
+            return null;
+        }
     }
 }

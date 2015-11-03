@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * Created by Mr.Phoenix on 9/13/2015.
  */
-public class SasCommandBase implements ISasCommandBase, Listener {
+public abstract class SasCommandBase implements CommandExecutor, TabCompleter {
 
     protected SasPlugin plugin;
     protected String command;
@@ -38,20 +39,12 @@ public class SasCommandBase implements ISasCommandBase, Listener {
     }
 
     protected void msg(CommandSender sender, String msg){
-        if( sender instanceof Player){
-            ( ( Player ) sender ).sendMessage( msg );
-        }else{
-            System.out.println( msg );
-        }
+        sender.sendMessage(msg);
     }
 
-    public boolean run( CommandSender commandSender, Command command, String string, String[] strings ){
-        return false;
-    }
+    public abstract boolean run( CommandSender commandSender, Command command, String string, String[] strings );
 
-    public List<String> tab( CommandSender commandSender, Command command, String string ,String[] strings ){
-        return null;
-    }
+    public abstract List<String> tab( CommandSender commandSender, Command command, String string ,String[] strings );
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {

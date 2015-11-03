@@ -10,6 +10,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 /**
  * Created by Mr.Phoenix on 9/13/2015.
  */
@@ -27,12 +29,17 @@ public class SasPing extends SasCommandBase implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean run(CommandSender commandSender, Command command, String s, String[] strings) {
         if( ! ( commandSender instanceof Player) ){
             return true;
         }
         Player ply = ( Player )commandSender;
         ply.sendMessage( getPing(ply)+"ms!" );
         return true;
+    }
+
+    @Override
+    public List<String> tab(CommandSender commandSender, Command command, String string, String[] strings) {
+        return null;
     }
 }

@@ -23,6 +23,17 @@ public class SasWhois extends SasCommandBase implements CommandExecutor {
         this.command = "saswhois";
     }
 
+    @Override
+    public boolean run(CommandSender commandSender, Command command, String string, String[] strings) {
+        reply( Bukkit.getServer().getPlayer( strings[0] ), commandSender );
+        return true;
+    }
+
+    @Override
+    public List<String> tab(CommandSender commandSender, Command command, String string, String[] strings) {
+        return null;
+    }
+
     public SasUs getBool( String name, boolean aBoolean ){
         SasUs sasUs = new SasUs( name );
         sasUs.setBoolean( aBoolean );
@@ -101,12 +112,6 @@ public class SasWhois extends SasCommandBase implements CommandExecutor {
                 msg( commandSender, str );
             }
         }
-        return true;
-    }
-
-    @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        reply( Bukkit.getServer().getPlayer( strings[0] ), commandSender );
         return true;
     }
 }

@@ -9,6 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.List;
 import java.util.Random;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
@@ -22,6 +23,11 @@ public class SasWild extends SasCommandBase implements CommandExecutor {
 		this.plugin = plugin;
 		this.command = "wild";
 		this.wg = plugin.wg;
+	}
+
+	@Override
+	public List<String> tab(CommandSender commandSender, Command command, String string, String[] strings) {
+		return null;
 	}
 
 	public boolean checkLocation( Location loc)
@@ -71,7 +77,7 @@ public class SasWild extends SasCommandBase implements CommandExecutor {
 	}
 
 	@Override
-	public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+	public boolean run(CommandSender commandSender, Command command, String s, String[] strings) {
 		if( !( commandSender instanceof Player ) ){
 			plugin.getLogger().warning( "RLY?" );
 			return true;

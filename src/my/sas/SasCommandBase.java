@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Mr.Phoenix on 9/13/2015.
  */
-public abstract class SasCommandBase implements CommandExecutor, TabCompleter {
+public abstract class SasCommandBase implements CommandExecutor, TabCompleter, Listener {
 
     protected SasPlugin plugin;
     protected String command;

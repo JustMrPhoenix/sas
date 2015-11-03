@@ -32,7 +32,7 @@ public class SasPlugin extends JavaPlugin implements Listener {
 		Manager = getServer( ).getPluginManager();
 		ess = (Essentials) Manager.getPlugin("Essentials");
 		wg = (WorldGuardPlugin) Manager.getPlugin("WorldGuard");
-		pex = (PermissionsEx) Manager.getPlugin("WorldGuard");
+		pex = (PermissionsEx) Manager.getPlugin("PermissionsEx");
 		kitExecutor = new KitExecutor( this );
 		invKeeper = new InvKeeper( );
 		itemHandler = new ItemHandler( this, this.getClassLoader( ) );

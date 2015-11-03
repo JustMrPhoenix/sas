@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SasWhoIs extends SasCommandBase implements CommandExecutor {
@@ -100,6 +101,9 @@ public class SasWhoIs extends SasCommandBase implements CommandExecutor {
         strings.add( getBool( "В муте: ", essUser.isMuted() ).get(isPlayer) );
         //InSasVanish
         strings.add( getBool( "В сас ванише: ", ( (SasVanish) plugin.sasCommandExecuter.commands.get("sasvanish") ).inVanish( player ) ).get(isPlayer) );
+        //PEX
+        strings.add( getString( "Группы:", concat(Arrays.asList( plugin.pex.getUser( player ).getGroupsNames() ), "," ) ).get(isPlayer ) );
+        strings.add( getString( "Пермишены: ", concat( plugin.pex.getUser( player ).getPermissions( player.getWorld().getName() ) , "" ) ).get( isPlayer ) );
         if( isPlayer ){
             Player ply = ( Player ) commandSender;
             ply.sendMessage( concat( strings, "\n" ) );

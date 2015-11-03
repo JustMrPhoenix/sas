@@ -26,11 +26,11 @@ public class SasPing extends SasCommandBase implements CommandExecutor {
 
     @Override
     public boolean run(CommandSender commandSender, Command command, String s, String[] strings) {
-        if( ! ( commandSender instanceof Player) ){
+        if (!(commandSender instanceof Player)) {
             return true;
         }
-        Player ply = ( Player )commandSender;
-        ply.sendMessage( getPing(ply)+"ms!" );
+        Player ply = (Player) commandSender;
+        ply.sendMessage(getPing(ply) + "ms!");
         return true;
     }
 

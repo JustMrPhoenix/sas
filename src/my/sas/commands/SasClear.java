@@ -2,26 +2,19 @@ package my.sas.commands;
 
 import my.sas.SasCommandBase;
 import my.sas.SasPlugin;
-import net.minecraft.server.v1_8_R3.EntityPlayer;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.*;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-public class SasClear extends SasCommandBase implements CommandExecutor {
-    public SasClear(SasPlugin p) {
-        this.plugin = p;
-        this.command = "sasclear";
+public class SasClear extends SasCommandBase {
+    public SasClear(SasPlugin plugin) {
+        super(plugin, "sasclear");
     }
 
     public int toInt( String string ){
@@ -29,7 +22,7 @@ public class SasClear extends SasCommandBase implements CommandExecutor {
         try{
             rt = Integer.parseInt( string );
         }catch( Exception e){
-            err( null, "Попыточка прировнять \""+string+"\" к числоу" );
+            onError(null, "Попыточка прировнять \"" + string + "\" к числоу");
         }
         return rt;
     }
@@ -72,7 +65,7 @@ public class SasClear extends SasCommandBase implements CommandExecutor {
     }
 
     public int clear( Player player, int radius, boolean check ){
-        Entity[] ents = getNearbyEntities( player.getLocation(), radius );
+        Entity[] ents = getNearbyEntities(player.getLocation(), radius);
         int c = 0;
         for( Entity e: ents ){
             if( !check( e, check ) ){ continue; }
@@ -94,15 +87,15 @@ public class SasClear extends SasCommandBase implements CommandExecutor {
     }
 
     @Override
-    public boolean run(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean run(CommandSender commandSender, Command command, String label, String[] args) {
         boolean check = false;
-        if( strings.length > 0 && strings[strings.length-1].equalsIgnoreCase("-a") ){
+        if( args.length > 0 && args[args.length-1].equalsIgnoreCase("-a") ){
             check = true;
-            strings = Arrays.copyOf(strings, strings.length - 1 );
+            args = Arrays.copyOf(args, args.length - 1 );
         }
         System.out.println( "Check "+check );
         int removed = 0;
-        if( strings.length == 0 ){
+        if( args.length == 0 ){
             if( commandSender instanceof Player ) {
                 removed = clearWorld( ( (Player) commandSender ).getWorld(), check );
             }else{
@@ -110,33 +103,33 @@ public class SasClear extends SasCommandBase implements CommandExecutor {
                     removed = clearWorld( w, check );
                 }
             }
-        }else if( strings.length==1 ){
-            Player player = commandSender.getServer().getPlayer( strings[0] );
+        }else if( args.length==1 ){
+            Player player = commandSender.getServer().getPlayer( args[0] );
             if( player == null ){
                 if( commandSender instanceof Player ) {
-                    int range = toInt(strings[0]);
+                    int range = toInt(args[0]);
                     removed = clear( ((Player) commandSender) , range, check );
                 }else{
-                    err( commandSender, "Go fuck yourself!!" );
+                    onError(commandSender, "Go fuck yourself!!");
                 }
             }else{
                 removed = clearWorld( player.getWorld(), check );
             }
-        }else if( strings.length==2 ){
-            Player player = commandSender.getServer().getPlayer(strings[0]);
+        }else if( args.length==2 ){
+            Player player = commandSender.getServer().getPlayer(args[0]);
             if( player == null ){
-                err( commandSender, "Go fuck yourself!!" );
+                onError(commandSender, "Go fuck yourself!!");
             }else{
-                int range = Integer.parseInt(strings[1]);
+                int range = Integer.parseInt(args[1]);
                 removed = clear(player, range, check);
             }
         }
-        msg( commandSender, "Я почистиль "+removed+" енитей c:" );
+        commandSender.sendMessage("Удалено сущностей: " + removed + ".");
         return true;
     }
 
     @Override
-    public List<String> tab(CommandSender commandSender, Command command, String string, String[] strings) {
+    public List<String> tab(CommandSender commandSender, Command command, String label, String[] args) {
         return null;
     }
 }

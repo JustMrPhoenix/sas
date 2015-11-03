@@ -6,24 +6,22 @@ import my.sas.SasPlugin;
 import my.sas.util.Point;
 import org.bukkit.*;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 import java.util.Random;
 
-public class SasWild extends SasCommandBase implements CommandExecutor {
+public class SasWild extends SasCommandBase {
 	public WorldGuardPlugin wg;
 
-	public SasWild( SasPlugin plugin){
-		this.plugin = plugin;
-		this.command = "wild";
-		this.wg = plugin.wg;
+	public SasWild(SasPlugin plugin) {
+		super(plugin, "wild");
+		this.wg = plugin.worldGuard;
 	}
 
 	@Override
-	public List<String> tab(CommandSender commandSender, Command command, String string, String[] strings) {
+	public List<String> tab(CommandSender commandSender, Command command, String label, String[] args) {
 		return null;
 	}
 
@@ -74,7 +72,7 @@ public class SasWild extends SasCommandBase implements CommandExecutor {
 	}
 
 	@Override
-	public boolean run(CommandSender commandSender, Command command, String s, String[] strings) {
+	public boolean run(CommandSender commandSender, Command command, String label, String[] args) {
 		if( !( commandSender instanceof Player ) ){
 			plugin.getLogger().warning( "RLY?" );
 			return true;

@@ -1,4 +1,4 @@
-package my.sas.util;
+package my.sas.message;
 
 public class RussianMessage {
     public static final String YES = "да";

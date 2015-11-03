@@ -53,19 +53,21 @@ public class SasClear extends SasCommandBase implements CommandExecutor {
             return !entity.getType().equals( EntityType.PLAYER );
         }
         EntityType type = entity.getType();
-        if( type.equals( EntityType.ARMOR_STAND ) || type.equals( EntityType.PLAYER )   ||
-                type.equals( EntityType.PAINTING )|| type.equals( EntityType.PIG )      ||
-                type.equals( EntityType.RABBIT )  || type.equals( EntityType.BOAT )     ||
-                type.equals( EntityType.CHICKEN ) || type.equals( EntityType.ITEM_FRAME)||
-                type.equals( EntityType.MINECART_CHEST )
-        ) { return false; }
         if( type.equals( EntityType.HORSE ) ) {
             Horse horse = (Horse) entity;
             if (horse.isLeashed() || horse.isCarryingChest()) {
                 return false;
+            }else {
+                return true;
             }
         }
-        if( type.equals( EntityType.WOLF ) && ( (Wolf) entity ).isLeashed() ){ return false; }
+        if( type.equals( EntityType.WOLF ) ){
+            if( ( (Wolf) entity ).isLeashed() ){
+                return false;
+            }else{
+                return true;
+            }
+        }
         return true;
     }
 
@@ -92,7 +94,7 @@ public class SasClear extends SasCommandBase implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean run(CommandSender commandSender, Command command, String s, String[] strings) {
         boolean check = false;
         if( strings.length > 0 && strings[strings.length-1].equalsIgnoreCase("-a") ){
             check = true;
@@ -131,5 +133,10 @@ public class SasClear extends SasCommandBase implements CommandExecutor {
         }
         msg( commandSender, "Я почистиль "+removed+" енитей c:" );
         return true;
+    }
+
+    @Override
+    public List<String> tab(CommandSender commandSender, Command command, String string, String[] strings) {
+        return null;
     }
 }

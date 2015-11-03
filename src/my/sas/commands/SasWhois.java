@@ -19,12 +19,23 @@ public class SasWhoIs extends SasCommandBase implements CommandExecutor {
         this.command = "saswhois";
     }
 
-    public SasUserStatusRow getBool( String name, boolean aBoolean ){
-        SasUserStatusRow sasUserStatusRow = new SasUserStatusRow( name );
-        sasUserStatusRow.setBoolean( aBoolean );
-        return sasUserStatusRow;
+    @Override
+    public boolean run(CommandSender commandSender, Command command, String string, String[] strings) {
+        reply( Bukkit.getServer().getPlayer( strings[0] ), commandSender );
+        return true;
     }
 
+    @Override
+    public List<String> tab(CommandSender commandSender, Command command, String string, String[] strings) {
+        return null;
+    }
+
+    public SasUserStatusRow getBool( String name, boolean aBoolean ){
+        SasUserStatusRow sasUserStatusRow = new SasUserStatusRow( name );
+        sasUserStatusRow.setBoolean(aBoolean);
+        return sasUserStatusRow;
+    }
+    
     public SasUserStatusRow getString( String name, String string ){
         SasUserStatusRow sasUserStatusRow = new SasUserStatusRow( name );
         sasUserStatusRow.setString(string);
@@ -97,12 +108,6 @@ public class SasWhoIs extends SasCommandBase implements CommandExecutor {
                 msg( commandSender, str );
             }
         }
-        return true;
-    }
-
-    @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        reply( Bukkit.getServer().getPlayer( strings[0] ), commandSender );
         return true;
     }
 }

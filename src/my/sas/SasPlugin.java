@@ -7,6 +7,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class SasPlugin extends JavaPlugin implements Listener {
 	public SasConfig mainConfig;
@@ -20,6 +21,7 @@ public class SasPlugin extends JavaPlugin implements Listener {
 	public Essentials ess;
 	public WorldGuardPlugin wg;
 	public SasCommandBlock sasCommandBlock;
+	public PermissionsEx pex;
 
 	@Override
 	public void onEnable() {
@@ -28,6 +30,7 @@ public class SasPlugin extends JavaPlugin implements Listener {
 		Manager = getServer( ).getPluginManager();
 		ess = (Essentials) Manager.getPlugin("Essentials");
 		wg = (WorldGuardPlugin) Manager.getPlugin("WorldGuard");
+		pex = (PermissionsEx) Manager.getPlugin("PermissionsEx");
 		kitExecutor = new KitExecutor( this );
 		invKeeper = new InvKeeper( );
 		itemHandler = new ItemHandler( this, this.getClassLoader( ) );

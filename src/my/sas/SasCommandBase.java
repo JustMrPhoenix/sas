@@ -2,13 +2,15 @@ package my.sas;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 import java.util.List;
 
-public class SasCommandBase implements ISasCommandBase, Listener {
+public abstract class SasCommandBase implements CommandExecutor, TabCompleter, Listener {
     protected SasPlugin plugin;
     protected String command;
 
@@ -35,13 +37,9 @@ public class SasCommandBase implements ISasCommandBase, Listener {
         sender.sendMessage(msg);
     }
 
-    public boolean run( CommandSender commandSender, Command command, String string, String[] strings ){
-        return false;
-    }
+    public abstract boolean run( CommandSender commandSender, Command command, String string, String[] strings );
 
-    public List<String> tab( CommandSender commandSender, Command command, String string ,String[] strings ){
-        return null;
-    }
+    public abstract List<String> tab( CommandSender commandSender, Command command, String string ,String[] strings );
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {

@@ -18,11 +18,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-/**
- * Created by Mr.Phoenix on 10/27/2015.
- */
 public class SasClear extends SasCommandBase implements CommandExecutor {
-
     public SasClear(SasPlugin p) {
         this.plugin = p;
         this.command = "sasclear";

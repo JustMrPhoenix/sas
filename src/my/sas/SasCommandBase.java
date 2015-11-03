@@ -9,25 +9,24 @@ import org.bukkit.event.Listener;
 import java.util.List;
 
 public class SasCommandBase implements ISasCommandBase, Listener {
-
     protected SasPlugin plugin;
     protected String command;
 
     public SasCommandBase() {
     }
 
-    public String getCommand( ){
+    public String getCommand(){
         return command;
     }
 
-    public SasCommandBase( SasPlugin p){
+    public SasCommandBase(SasPlugin p){
         this.plugin = p;
     }
 
     protected void err(CommandSender sender, String err){
         if( sender != null && sender instanceof Player){
             Player ply = ( Player ) sender;
-            ply.sendMessage( ChatColor.RED+"Ошибка!"+err );
+            ply.sendMessage(ChatColor.RED + "Ошибка!" + err);
         }
         System.out.println("[" + command + "]Error!" + err);
     }

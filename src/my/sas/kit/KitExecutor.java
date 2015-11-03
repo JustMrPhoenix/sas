@@ -18,8 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class KitExecutor implements Listener
-{
+public class KitExecutor implements Listener {
 	public HashMap<String,Kit> kits = new HashMap<String,Kit>( );
 
 	private SasPlugin plugin;

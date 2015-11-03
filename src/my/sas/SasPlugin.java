@@ -22,8 +22,7 @@ public class SasPlugin extends JavaPlugin implements Listener {
 	public SasCommandBlock sasCommandBlock;
 
 	@Override
-	public void onEnable()
-	{
+	public void onEnable() {
 		config = getConfig();
 		mainConfig = new SasConfig( "db.yml", this );
 		Manager = getServer( ).getPluginManager();
@@ -46,8 +45,7 @@ public class SasPlugin extends JavaPlugin implements Listener {
 	}
 	
 	@Override
-	public void onDisable( )
-	{
+	public void onDisable() {
 		System.out.println(mainConfig.toString());
 		mainConfig.save();
 		getLogger().info( "SAS plugin deactivated" );

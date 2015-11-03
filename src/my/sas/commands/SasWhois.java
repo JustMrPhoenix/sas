@@ -13,11 +13,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Mr.Phoenix on 10/29/2015.
- */
 public class SasWhois extends SasCommandBase implements CommandExecutor {
-
     public SasWhois(SasPlugin p) {
         this.plugin = p;
         this.command = "saswhois";

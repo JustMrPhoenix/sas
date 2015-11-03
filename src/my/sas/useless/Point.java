@@ -1,4 +1,4 @@
-package my.sas;
+package my.sas.useless;
 
 public class Point {
 	public int x, y;

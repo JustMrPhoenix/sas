@@ -1,19 +1,15 @@
 package my.sas;
 
 import com.earth2me.essentials.Essentials;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import my.sas.kit.KitExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-
-import java.io.File;
-import java.io.IOException;
 
 public class SasPlugin extends JavaPlugin implements Listener {
-	public FileConfiguration mainConfig;
-	public File mainConfigFile;
+	public SasConfig mainConfig;
 	public FileConfiguration config;
 	public PluginManager Manager;
 	public KitExecutor kitExecutor;
@@ -25,26 +21,11 @@ public class SasPlugin extends JavaPlugin implements Listener {
 	public WorldGuardPlugin wg;
 	public SasCommandBlock sasCommandBlock;
 
-	public FileConfiguration config(){
-		mainConfigFile = new File(getDataFolder(), "db.yml");
-		if (!mainConfigFile.exists()) {
-			try {
-				mainConfigFile.createNewFile();
-			} catch (IOException e) {
-				getLogger().info("Failed to create new configuration file.");
-				e.printStackTrace();
-			}
-		}
-		FileConfiguration myFileConfig = YamlConfiguration.loadConfiguration(mainConfigFile);
-		System.out.println( myFileConfig );
-		return myFileConfig;
-	}
-
 	@Override
 	public void onEnable()
 	{
 		config = getConfig();
-		mainConfig = config();
+		mainConfig = new SasConfig( "db.yml", this );
 		Manager = getServer( ).getPluginManager();
 		ess = (Essentials) Manager.getPlugin("Essentials");
 		wg = (WorldGuardPlugin) Manager.getPlugin("WorldGuard");
@@ -61,18 +42,14 @@ public class SasPlugin extends JavaPlugin implements Listener {
 		Manager.registerEvents( antiGodKill, this );
 		Manager.registerEvents( sasCommandBlock, this);
 		getLogger().info( "SAS plugin activated" );
+		mainConfig.setAutosave(true);
 	}
 	
 	@Override
 	public void onDisable( )
 	{
 		System.out.println(mainConfig.toString());
-		kitExecutor.save();
-		try {
-			mainConfig.save(mainConfigFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		mainConfig.save();
 		getLogger().info( "SAS plugin deactivated" );
 	}
 }

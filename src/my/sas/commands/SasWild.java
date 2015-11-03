@@ -1,8 +1,9 @@
 package my.sas.commands;
 
-import my.sas.Point;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import my.sas.SasCommandBase;
 import my.sas.SasPlugin;
+import my.sas.useless.Point;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,7 +11,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Random;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class SasWild extends SasCommandBase implements CommandExecutor {
 	public WorldGuardPlugin wg;

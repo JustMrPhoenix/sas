@@ -1,14 +1,7 @@
-package my.sas;
+package my.sas.kit;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.World;
+import my.sas.SasPlugin;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.ConfigurationSection;
@@ -20,6 +13,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class KitExecutor implements Listener
 {
@@ -38,11 +35,11 @@ public class KitExecutor implements Listener
 		plugin.getCommand( "delsign" ).setExecutor( commandExecutor );
 		plugin.getCommand( "addkit" ).setExecutor( commandExecutor );
 		plugin.getLogger().info("Sas kit executor initialized.");
-		if (plugin.mainConfig.contains("kits"))
+		if( plugin.mainConfig.getFileConfiguration().contains("kits") )
 		{
-			config = plugin.mainConfig.getConfigurationSection("kits");
+			config = plugin.mainConfig.getSection("kits");
 			Map<String,Object> data = config.getValues( false );
-			deserialize( data );
+			deserialize(data);
 		}
 	}
 	
@@ -131,7 +128,7 @@ public class KitExecutor implements Listener
 		int x = loc.getBlockX( );
 		int y = loc.getBlockY( );
 		int z = loc.getBlockZ( );
-		
+
 		switch ( sign.getData( ) )
 		{
 			case 3:

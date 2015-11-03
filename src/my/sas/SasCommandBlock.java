@@ -5,7 +5,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -25,10 +24,9 @@ public class SasCommandBlock implements Listener, CommandExecutor{
         this.plugin = plugin;
         plugin.getCommand( "sasblock" ).setExecutor( this );
         plugin.getCommand( "sasunblock" ).setExecutor( this );
-        FileConfiguration fileConfiguration = plugin.mainConfig;
-        if( plugin.mainConfig.contains( "blocks" ) )
+        if( plugin.mainConfig.getFileConfiguration().contains( "blocks" ) )
         {
-            config = plugin.mainConfig.getConfigurationSection( "blocks" );
+            config = plugin.mainConfig.getSection( "blocks" );
             Map<String,Object> data = config.getValues( false );
             deserialize( data );
         }
@@ -48,7 +46,7 @@ public class SasCommandBlock implements Listener, CommandExecutor{
         if( map != null )
         {
             plugin.mainConfig.set("blocks", map);
-            plugin.saveConfig();
+            plugin.mainConfig.save( );
         }
     }
 
@@ -93,9 +91,7 @@ public class SasCommandBlock implements Listener, CommandExecutor{
     }
 
     @EventHandler( priority = EventPriority.HIGHEST )
-    public void onPreprocess(PlayerCommandPreprocessEvent e) {
-        checkEvent( e );
-    }
+    public void onPreprocess(PlayerCommandPreprocessEvent e) { checkEvent( e ); }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -104,6 +100,7 @@ public class SasCommandBlock implements Listener, CommandExecutor{
                 if( strings.length == 2){
                     if( !blocks.containsKey( strings[0] ) ){
                         blocks.put(strings[0], Integer.parseInt(strings[1]));
+                        save();
                         if( commandSender instanceof Player ){
                             ( ( Player ) commandSender ).sendMessage( ChatColor.GREEN+"Добавлено!" );
                         }else{

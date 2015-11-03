@@ -110,4 +110,8 @@ public class SasItemBase implements Listener{
 	public void onDamage(EntityDamageByEntityEvent e) {
 
 	}
+
+	public void onTimer( Player ply ){
+
+	}
 }

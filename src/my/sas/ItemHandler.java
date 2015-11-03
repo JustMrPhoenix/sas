@@ -49,7 +49,7 @@ public class ItemHandler implements Listener {
 				items.put(info.getSimpleName(), object);
 				SasItemBase base = ( SasItemBase ) object;
 				if( base.listen ){
-					plugin.Manager.registerEvents( (Listener) object, plugin );
+					plugin.pluginManager.registerEvents( (Listener) object, plugin );
 				}
 			}
 		} catch (Exception e) {

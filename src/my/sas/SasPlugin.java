@@ -12,7 +12,7 @@ import ru.tehkode.permissions.bukkit.PermissionsEx;
 public class SasPlugin extends JavaPlugin implements Listener {
     public SasConfig mainConfig;
     public FileConfiguration config;
-    public PluginManager Manager;
+    public PluginManager pluginManager;
     public KitExecutor kitExecutor;
     public InvKeeper invKeeper;
     public ItemHandler itemHandler;
@@ -28,22 +28,22 @@ public class SasPlugin extends JavaPlugin implements Listener {
         config = getConfig();
         // TODO: Separate main config and db file correctly
         mainConfig = new SasConfig("db.yml", this);
-        Manager = getServer().getPluginManager();
-        essentials = (Essentials) Manager.getPlugin("Essentials");
-        worldGuard = (WorldGuardPlugin) Manager.getPlugin("WorldGuard");
-        pex = (PermissionsEx) Manager.getPlugin("PermissionsEx");
+        pluginManager = getServer().getPluginManager();
+        essentials = (Essentials) pluginManager.getPlugin("Essentials");
+        worldGuard = (WorldGuardPlugin) pluginManager.getPlugin("WorldGuard");
+        pex = (PermissionsEx) pluginManager.getPlugin("PermissionsEx");
         kitExecutor = new KitExecutor(this);
         invKeeper = new InvKeeper();
         itemHandler = new ItemHandler(this, this.getClassLoader());
         sasCommandExecuter = new SasCommandExecutor(this, this.getClassLoader());
         antiGodKill = new AntiGodKill(essentials);
         sasCommandBlock = new SasCommandBlock(this);
-        Manager.registerEvents(this, this);
-        Manager.registerEvents(invKeeper, this);
-        Manager.registerEvents(kitExecutor, this);
-        Manager.registerEvents(itemHandler, this);
-        Manager.registerEvents(antiGodKill, this);
-        Manager.registerEvents(sasCommandBlock, this);
+        pluginManager.registerEvents(this, this);
+        pluginManager.registerEvents(invKeeper, this);
+        pluginManager.registerEvents(kitExecutor, this);
+        pluginManager.registerEvents(itemHandler, this);
+        pluginManager.registerEvents(antiGodKill, this);
+        pluginManager.registerEvents(sasCommandBlock, this);
         getLogger().info("SAS plugin activated");
         mainConfig.setAutosave(true);
     }

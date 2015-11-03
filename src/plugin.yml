@@ -1,6 +1,6 @@
 name: SAS
 main: my.sas.SasPlugin
-version: 1.4
+version: 1.5
 description: sas
 commands:
    sas:
@@ -47,12 +47,12 @@ commands:
       permission: sas.wild
       description: Teleport u to RAAANDOM location
       usage: /<command>
-   sasclear:
-      permission: sas.clear
-      description: Clear entityes around u
-      usage: /<command> [[player] [radius]]
+#   sasclear:
+#      permission: sas.clear
+#      description: Clear entityes around u
+#      usage: /<command> [[player] [radius]]
    saswhois:
-      permission: sas.clear
+      permission: sas.whois
       description: Display whois for a player
       usage: /<command> <player>
    alias:

@@ -32,11 +32,7 @@ public class SasCommandBase implements ISasCommandBase, Listener {
     }
 
     protected void msg(CommandSender sender, String msg){
-        if( sender instanceof Player){
-            ( ( Player ) sender ).sendMessage( msg );
-        }else{
-            System.out.println( msg );
-        }
+        sender.sendMessage(msg);
     }
 
     public boolean run( CommandSender commandSender, Command command, String string, String[] strings ){

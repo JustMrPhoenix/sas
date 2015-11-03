@@ -3,7 +3,7 @@ package my.sas.commands;
 import com.earth2me.essentials.User;
 import my.sas.SasCommandBase;
 import my.sas.SasPlugin;
-import my.sas.useless.SasUs;
+import my.sas.util.SasUserStatusRow;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,22 +13,22 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SasWhois extends SasCommandBase implements CommandExecutor {
-    public SasWhois(SasPlugin p) {
-        this.plugin = p;
+public class SasWhoIs extends SasCommandBase implements CommandExecutor {
+    public SasWhoIs(SasPlugin plugin) {
+        this.plugin = plugin;
         this.command = "saswhois";
     }
 
-    public SasUs getBool( String name, boolean aBoolean ){
-        SasUs sasUs = new SasUs( name );
-        sasUs.setBoolean( aBoolean );
-        return sasUs;
+    public SasUserStatusRow getBool( String name, boolean aBoolean ){
+        SasUserStatusRow sasUserStatusRow = new SasUserStatusRow( name );
+        sasUserStatusRow.setBoolean( aBoolean );
+        return sasUserStatusRow;
     }
 
-    public SasUs getString( String name, String string ){
-        SasUs sasUs = new SasUs( name );
-        sasUs.setString(string);
-        return sasUs;
+    public SasUserStatusRow getString( String name, String string ){
+        SasUserStatusRow sasUserStatusRow = new SasUserStatusRow( name );
+        sasUserStatusRow.setString(string);
+        return sasUserStatusRow;
     }
 
     private String concat( List<String> strings, String s ){
@@ -73,7 +73,7 @@ public class SasWhois extends SasCommandBase implements CommandExecutor {
         strings.add( getBool( "OP: ", player.isOp() ).get(isPlayer));
         //Fly
         boolean inFly = player.isFlying();
-        SasUs fly = new SasUs( "Режим полёта: ");
+        SasUserStatusRow fly = new SasUserStatusRow( "Режим полёта: ");
         fly.setBoolean( inFly );
         if( inFly ){
             fly.setComment( "летает" );

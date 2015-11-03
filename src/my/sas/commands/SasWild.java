@@ -3,7 +3,7 @@ package my.sas.commands;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import my.sas.SasCommandBase;
 import my.sas.SasPlugin;
-import my.sas.useless.Point;
+import my.sas.util.Point;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

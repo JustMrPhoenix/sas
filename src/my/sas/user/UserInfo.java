@@ -8,14 +8,14 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserStatus {
-    private List<UserStatusRow> statusRows = new ArrayList<>();
+public class UserInfo {
+    private List<UserInfoRow> statusRows = new ArrayList<>();
 
-    public void addRow(UserStatusRow row) {
+    public void addRow(UserInfoRow row) {
         statusRows.add(row);
     }
 
-    public List<UserStatusRow> getStatusRows() {
+    public List<UserInfoRow> getStatusRows() {
         return statusRows;
     }
 
@@ -23,7 +23,7 @@ public class UserStatus {
         List<String> messageLines = new ArrayList<>();
 
         messageLines.add(ChatColor.YELLOW + "=== SAS СТАТУС ИГРОКА ===");
-        for (UserStatusRow statusRow : statusRows) {
+        for (UserInfoRow statusRow : statusRows) {
             messageLines.add(statusRow.getStatusString());
         }
 

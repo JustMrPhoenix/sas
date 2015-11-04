@@ -4,19 +4,18 @@ import com.google.common.base.Strings;
 import my.sas.message.RussianMessage;
 import org.bukkit.ChatColor;
 
-// TODO: Move to package my.sas.commands.vanish with SasVanish after SasCommandExecutor refactor
-public class UserStatusRow {
+public class UserInfoRow {
     private String description;
 
     private Boolean booleanValue;
     private String stringValue;
 
-    public UserStatusRow(String description, boolean value) {
+    public UserInfoRow(String description, boolean value) {
         this.description = Strings.nullToEmpty(description);
         this.booleanValue = value;
     }
 
-    public UserStatusRow(String description, String value) {
+    public UserInfoRow(String description, String value) {
         this.description = Strings.nullToEmpty(description);
         this.stringValue = value;
     }

@@ -3,8 +3,8 @@ package my.sas.commands;
 import com.earth2me.essentials.User;
 import my.sas.SasCommandBase;
 import my.sas.SasPlugin;
-import my.sas.user.UserStatus;
-import my.sas.user.UserStatusRow;
+import my.sas.user.UserInfo;
+import my.sas.user.UserInfoRow;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -41,44 +41,42 @@ public class SasWhoIs extends SasCommandBase {
     }
 
     public void reply(Player target, CommandSender commandSender) {
-        UserStatus userStatus = new UserStatus();
+        UserInfo userInfo = new UserInfo();
         User essUser = plugin.essentials.getUser(target);
 
         //Nick
-        userStatus.addRow(new UserStatusRow("Ник: ", target.getName()));
+        userInfo.addRow(new UserInfoRow("Ник: ", target.getName()));
         //HP
-        userStatus.addRow(new UserStatusRow("Здоровье: ", target.getHealth() + "/" + target.getMaxHealth() + " ( +" + target.getFoodLevel() + " насыщение )"));
+        userInfo.addRow(new UserInfoRow("Здоровье: ", target.getHealth() + "/" + target.getMaxHealth() + " ( +" + target.getFoodLevel() + " насыщение )"));
         //XP
-        userStatus.addRow(new UserStatusRow("Уровень: ", target.getExp() + "(уровень " + target.getLevel() + " )"));
+        userInfo.addRow(new UserInfoRow("Уровень: ", target.getExp() + "(уровень " + target.getLevel() + " )"));
         //location
         // TODO: Make output readable
-        userStatus.addRow(new UserStatusRow("Местоположение: ", target.getLocation().toString()));
+        userInfo.addRow(new UserInfoRow("Местоположение: ", target.getLocation().toString()));
         //balance
-        userStatus.addRow(new UserStatusRow("Баланс: ", essUser.getMoney().toString()));
+        userInfo.addRow(new UserInfoRow("Баланс: ", essUser.getMoney().toString()));
         //IP
-        userStatus.addRow(new UserStatusRow("IP: ", target.getAddress().toString()));
+        userInfo.addRow(new UserInfoRow("IP: ", target.getAddress().toString()));
         //GameMode
-        userStatus.addRow(new UserStatusRow("Игровой режим: ", target.getGameMode().name()));
+        userInfo.addRow(new UserInfoRow("Игровой режим: ", target.getGameMode().name()));
         //GodMode
-        userStatus.addRow(new UserStatusRow("В режиме бога: ", essUser.isGodModeEnabled()));
+        userInfo.addRow(new UserInfoRow("В режиме бога: ", essUser.isGodModeEnabled()));
         //OP
-        userStatus.addRow(new UserStatusRow("OP: ", target.isOp()));
+        userInfo.addRow(new UserInfoRow("OP: ", target.isOp()));
         //Fly
-        userStatus.addRow(new UserStatusRow("Летает: ", target.isFlying()));
+        userInfo.addRow(new UserInfoRow("Летает: ", target.isFlying()));
         //AFK
-        userStatus.addRow(new UserStatusRow("AFK: ", essUser.isAfk()));
+        userInfo.addRow(new UserInfoRow("AFK: ", essUser.isAfk()));
         //InJail
-        userStatus.addRow(new UserStatusRow("В тюрьме: ", essUser.isJailed()));
+        userInfo.addRow(new UserInfoRow("В тюрьме: ", essUser.isJailed()));
         //InMute
-        userStatus.addRow(new UserStatusRow("В муте: ", essUser.isMuted()));
+        userInfo.addRow(new UserInfoRow("В муте: ", essUser.isMuted()));
         //InSasVanish
-        userStatus.addRow(new UserStatusRow("В сас ванише: ", ((SasVanish) plugin.sasCommandExecuter.commands.get("sasvanish")).inVanish(target)));
+        userInfo.addRow(new UserInfoRow("В сас ванише: ", ((SasVanish) plugin.sasCommandExecuter.commands.get("sasvanish")).inVanish(target)));
         //PEX
-        userStatus.addRow(new UserStatusRow("Группы: ", StringUtils.join(PermissionsEx.getUser(target).getGroupsNames(), ", ")));
-        // TODO: Display only permissions added customly (not inherited from groups)
-        // This commented line displays ALL the permissions of a player
-//        userStatus.addRow(new UserStatusRow("Пермишены: ", StringUtils.join(PermissionsEx.getUser(target).getPermissions(target.getWorld().getName()), ", ")));
+        userInfo.addRow(new UserInfoRow("Группы: ", StringUtils.join(PermissionsEx.getUser(target).getGroupsNames(), ", ")));
+        userInfo.addRow(new UserInfoRow("Пермишены: ", StringUtils.join(PermissionsEx.getUser(target).getAllPermissions().get(null), ", ")));
 
-        userStatus.send(commandSender);
+        userInfo.send(commandSender);
     }
 }

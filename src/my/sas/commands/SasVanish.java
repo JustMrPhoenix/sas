@@ -16,26 +16,25 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-/**
- * Created by Mr.Phoenix on 9/13/2015.
- */
 public class SasVanish extends SasCommandBase implements TabCompleter {
 	private List<String> inVanish = new ArrayList<String>();
 	private Map<Player, Block> inventories = new HashMap<Player, Block>();
 	Essentials essentials;
+
 	public SasVanish(SasPlugin plugin) {
-		this.plugin = plugin;
-		this.command = "sasvanish";
-		this.essentials = plugin.ess;
+        super(plugin, "sasvanish");
+		this.essentials = plugin.essentials;
 	}
 
 	public void hide(Player ply) {
@@ -249,10 +248,10 @@ public class SasVanish extends SasCommandBase implements TabCompleter {
 	}
 
 	@Override
-	public boolean run(CommandSender commandSender, Command command, String s, String[] strings) {
-		if (strings.length == 1) {
-			if (vanish(strings[0])) {
-				unVanish(strings[0]);
+	public boolean run(CommandSender commandSender, Command command, String label, String[] args) {
+		if (args.length == 1) {
+			if (vanish(args[0])) {
+				unVanish(args[0]);
 			}
 		} else {
 			if (commandSender instanceof Player) {
@@ -260,14 +259,14 @@ public class SasVanish extends SasCommandBase implements TabCompleter {
 					unVanishPly((Player) commandSender);
 				}
 			} else {
-				err(commandSender, "U don't even have a body");
+				onError(commandSender, "U don't even have a body");
 			}
 		}
 		return true;
 	}
 
 	@Override
-	public List<String> tab(CommandSender commandSender, Command command, String string, String[] strings) {
+	public List<String> tab(CommandSender commandSender, Command command, String label, String[] args) {
 		return null;
 	}
 }

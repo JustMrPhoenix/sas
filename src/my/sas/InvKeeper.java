@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
+// TODO: Consider removing. Essentials has its own keep inventory.
 public class InvKeeper implements Listener
 {
 	public InvKeeper( ) { }

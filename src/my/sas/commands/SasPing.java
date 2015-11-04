@@ -1,22 +1,18 @@
 package my.sas.commands;
 
-import my.sas.SasPlugin;
 import my.sas.SasCommandBase;
+import my.sas.SasPlugin;
 import net.minecraft.server.v1_8_R3.EntityPlayer;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class SasPing extends SasCommandBase implements CommandExecutor {
-
+public class SasPing extends SasCommandBase {
     public SasPing(SasPlugin p) {
-        this.plugin = p;
-        this.command = "sasping";
+        super(p, "sasping");
     }
 
     public int getPing(Player p) {
@@ -26,7 +22,7 @@ public class SasPing extends SasCommandBase implements CommandExecutor {
     }
 
     @Override
-    public boolean run(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean run(CommandSender commandSender, Command command, String label, String[] args) {
         if (!(commandSender instanceof Player)) {
             return true;
         }
@@ -36,7 +32,7 @@ public class SasPing extends SasCommandBase implements CommandExecutor {
     }
 
     @Override
-    public List<String> tab(CommandSender commandSender, Command command, String string, String[] strings) {
+    public List<String> tab(CommandSender commandSender, Command command, String label, String[] args) {
         return null;
     }
 }

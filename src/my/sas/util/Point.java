@@ -1,10 +1,8 @@
-package my.sas.useless;
+package my.sas.util;
 
-/**
- * Created by Mr.Phoenix on 10/4/2015.
- */
 public class Point {
-	public int x, y;
+	private int x, y;
+
 	public Point( int x, int y ){
 		this.x = x;
 		this.y = y;

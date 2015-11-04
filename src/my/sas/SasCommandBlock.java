@@ -5,7 +5,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -15,9 +14,6 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Mr.Phoenix on 9/14/2015.
- */
 public class SasCommandBlock implements Listener, CommandExecutor{
     private SasPlugin plugin;
     private Map<String,Integer> blocks = new HashMap<String,Integer>();
@@ -28,9 +24,9 @@ public class SasCommandBlock implements Listener, CommandExecutor{
         this.plugin = plugin;
         plugin.getCommand( "sasblock" ).setExecutor( this );
         plugin.getCommand( "sasunblock" ).setExecutor( this );
-        if( plugin.main_config.getFileConfiguration().contains( "blocks" ) )
+        if( plugin.mainConfig.getFileConfiguration().contains( "blocks" ) )
         {
-            config = plugin.main_config.getSection( "blocks" );
+            config = plugin.mainConfig.getSection( "blocks" );
             Map<String,Object> data = config.getValues( false );
             deserialize( data );
         }
@@ -49,8 +45,8 @@ public class SasCommandBlock implements Listener, CommandExecutor{
         Map<String,Object> map = serialize( );
         if( map != null )
         {
-            plugin.main_config.set("blocks", map);
-            plugin.main_config.save( );
+            plugin.mainConfig.set("blocks", map);
+            plugin.mainConfig.save( );
         }
     }
 

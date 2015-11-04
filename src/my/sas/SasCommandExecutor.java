@@ -1,17 +1,11 @@
 package my.sas;
 
 import com.google.common.reflect.ClassPath;
-import org.bukkit.command.CommandExecutor;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-import java.util.List;
 
-/**
- * Created by Mr.Phoenix on 9/13/2015.
- */
 public class SasCommandExecutor {
 
     public SasPlugin plugin;
@@ -36,7 +30,7 @@ public class SasCommandExecutor {
 				commands.put( base.getCommand(), base );
 				plugin.getLogger().info( base+"|"+base.getCommand() );
 				plugin.getCommand( base.getCommand( ) ).setExecutor( base );
-                plugin.Manager.registerEvents( base, plugin );
+                plugin.pluginManager.registerEvents( base, plugin );
 			} catch ( Exception e) {
 				e.printStackTrace();
 			}

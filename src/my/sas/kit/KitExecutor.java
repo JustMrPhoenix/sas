@@ -1,15 +1,7 @@
 package my.sas.kit;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import my.sas.SasPlugin;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.ConfigurationSection;
@@ -22,13 +14,17 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-public class KitExecutor implements Listener
-{
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+public class KitExecutor implements Listener {
 	public HashMap<String,Kit> kits = new HashMap<String,Kit>( );
+
 	private SasPlugin plugin;
-	ConfigurationSection config;
+	private ConfigurationSection config;
 	public KitCommandExecutor commandExecutor;
-	
+
 	public KitExecutor( SasPlugin plugin )
 	{
 		this.plugin = plugin;
@@ -37,12 +33,12 @@ public class KitExecutor implements Listener
 		plugin.getCommand( "addsign" ).setExecutor( commandExecutor );
 		plugin.getCommand( "delsign" ).setExecutor( commandExecutor );
 		plugin.getCommand( "addkit" ).setExecutor( commandExecutor );
-		plugin.getLogger( ).info( "Sas kit executor inited!");
-		if( plugin.main_config.getFileConfiguration().contains( "kits" ) )
+		plugin.getLogger().info("Sas kit executor initialized.");
+		if( plugin.mainConfig.getFileConfiguration().contains("kits") )
 		{
-			config = plugin.main_config.getSection( "kits" );
+			config = plugin.mainConfig.getSection("kits");
 			Map<String,Object> data = config.getValues( false );
-			deserialize( data );
+			deserialize(data);
 		}
 	}
 	
@@ -131,7 +127,7 @@ public class KitExecutor implements Listener
 		int x = loc.getBlockX( );
 		int y = loc.getBlockY( );
 		int z = loc.getBlockZ( );
-		
+
 		switch ( sign.getData( ) )
 		{
 			case 3:
@@ -186,7 +182,7 @@ public class KitExecutor implements Listener
 		Map<String,Object> map = serialize( );
 		if( map != null )
 		{
-			plugin.main_config.set( "kits" , map );
+			plugin.mainConfig.set( "kits" , map );
 		}
 	}
 	public void deserialize( Map<String,Object> data )

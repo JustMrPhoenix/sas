@@ -9,9 +9,6 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Created by Mr.Phoenix on 10/11/2015.
- */
 public class SasConfig {
     private File file;
     private String name;

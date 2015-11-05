@@ -19,8 +19,7 @@ public class SasWhoIs extends SasCommandBase {
         super(plugin, "saswhois");
     }
 
-    @Override
-    public boolean run(CommandSender commandSender, Command command, String label, String[] args) {
+    public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
         if (args.length > 0) {
             Player target = Bukkit.getServer().getPlayer(args[0]);
 
@@ -33,11 +32,6 @@ public class SasWhoIs extends SasCommandBase {
         }
 
         return false;
-    }
-
-    @Override
-    public List<String> tab(CommandSender commandSender, Command command, String label, String[] args) {
-        return null;
     }
 
     public void reply(Player target, CommandSender commandSender) {

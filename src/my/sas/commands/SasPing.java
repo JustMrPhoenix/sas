@@ -21,18 +21,12 @@ public class SasPing extends SasCommandBase {
         return ep.ping;
     }
 
-    @Override
-    public boolean run(CommandSender commandSender, Command command, String label, String[] args) {
+    public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
         if (!(commandSender instanceof Player)) {
             return true;
         }
         Player ply = (Player) commandSender;
         ply.sendMessage(getPing(ply) + "ms!");
         return true;
-    }
-
-    @Override
-    public List<String> tab(CommandSender commandSender, Command command, String label, String[] args) {
-        return null;
     }
 }

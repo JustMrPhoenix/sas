@@ -86,8 +86,7 @@ public class SasClear extends SasCommandBase {
         return c;
     }
 
-    @Override
-    public boolean run(CommandSender commandSender, Command command, String label, String[] args) {
+    public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
         boolean check = false;
         if( args.length > 0 && args[args.length-1].equalsIgnoreCase("-a") ){
             check = true;
@@ -126,10 +125,5 @@ public class SasClear extends SasCommandBase {
         }
         commandSender.sendMessage("Удалено сущностей: " + removed + ".");
         return true;
-    }
-
-    @Override
-    public List<String> tab(CommandSender commandSender, Command command, String label, String[] args) {
-        return null;
     }
 }

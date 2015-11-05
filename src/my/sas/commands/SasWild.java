@@ -20,11 +20,6 @@ public class SasWild extends SasCommandBase {
 		this.wg = plugin.worldGuard;
 	}
 
-	@Override
-	public List<String> tab(CommandSender commandSender, Command command, String label, String[] args) {
-		return null;
-	}
-
 	public boolean checkLocation( Location loc)
 	{
 		if (loc.getBlock().getType() != Material.AIR && loc.getBlock().getType() != null) {
@@ -71,8 +66,7 @@ public class SasWild extends SasCommandBase {
 		}
 	}
 
-	@Override
-	public boolean run(CommandSender commandSender, Command command, String label, String[] args) {
+	public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
 		if( !( commandSender instanceof Player ) ){
 			plugin.getLogger().warning( "RLY?" );
 			return true;

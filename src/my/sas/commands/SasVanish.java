@@ -247,8 +247,7 @@ public class SasVanish extends SasCommandBase implements TabCompleter {
 		return list;
 	}
 
-	@Override
-	public boolean run(CommandSender commandSender, Command command, String label, String[] args) {
+	public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
 		if (args.length == 1) {
 			if (vanish(args[0])) {
 				unVanish(args[0]);
@@ -263,10 +262,5 @@ public class SasVanish extends SasCommandBase implements TabCompleter {
 			}
 		}
 		return true;
-	}
-
-	@Override
-	public List<String> tab(CommandSender commandSender, Command command, String label, String[] args) {
-		return null;
 	}
 }

@@ -9,7 +9,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.List;
 import java.util.Random;
 
 public class SasWild extends SasCommandBase {
@@ -17,7 +16,7 @@ public class SasWild extends SasCommandBase {
 
 	public SasWild(SasPlugin plugin) {
 		super(plugin, "wild");
-		this.wg = plugin.worldGuard;
+		this.wg = plugin.getWorldGuard();
 	}
 
 	public boolean checkLocation( Location loc)

@@ -1,5 +1,6 @@
 package my.sas;
 
+import my.sas.util.CollectionUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,15 +9,22 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class SasCommandBase implements CommandExecutor, TabCompleter, Listener {
     protected SasPlugin plugin;
-    protected String command;
+    protected List<String> commands = new ArrayList<String>();
+
+    public SasCommandBase(SasPlugin plugin, List<String> commands) {
+        this.plugin = plugin;
+        this.commands = CollectionUtil.requireNotEmpty(commands);
+    }
 
     public SasCommandBase(SasPlugin plugin, String command) {
         this.plugin = plugin;
-        this.command = command;
+        commands.add(Objects.requireNonNull(command));
     }
 
     protected void onError(CommandSender sender, String error) {
@@ -24,7 +32,7 @@ public abstract class SasCommandBase implements CommandExecutor, TabCompleter, L
             Player ply = (Player) sender;
             ply.sendMessage(ChatColor.RED + " Ошибка! " + error);
         }
-        System.out.println("[" + command + "] Error! " + error);
+        System.out.println("[" + commands.get(1) + "] Error! " + error);
     }
 
     @Override
@@ -36,6 +44,10 @@ public abstract class SasCommandBase implements CommandExecutor, TabCompleter, L
     }
 
     public String getCommand() {
-        return command;
+        return commands.get(0);
+    }
+
+    public List<String> getCommands() {
+        return commands;
     }
 }

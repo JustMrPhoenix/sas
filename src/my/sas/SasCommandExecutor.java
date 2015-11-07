@@ -1,39 +1,32 @@
 package my.sas;
 
-import com.google.common.reflect.ClassPath;
+import my.sas.commands.SasPing;
+import my.sas.commands.SasVanish;
+import my.sas.commands.SasWhoIs;
+import my.sas.commands.SasWild;
 
-import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.util.HashMap;
 
 public class SasCommandExecutor {
 
     public SasPlugin plugin;
-	public HashMap<String,SasCommandBase> commands = new HashMap<String,SasCommandBase>();
+    public HashMap<String, SasCommandBase> commands = new HashMap<String, SasCommandBase>();
 
-	public SasCommandExecutor(SasPlugin plugin, ClassLoader loader){
-		this.plugin = plugin;
-		ClassPath path = null;
-		try {
-			path = ClassPath.from(loader);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    public SasCommandExecutor(SasPlugin plugin) {
+        this.plugin = plugin;
 
-        for (ClassPath.ClassInfo info : path.getTopLevelClassesRecursive( "my.sas.commands" )) {
-			Class<?> clazz = null;
-			try {
-				clazz = Class.forName(info.getName(), true, loader );
-				Constructor<?> c = clazz.getConstructor( SasPlugin.class );
-				Object object = c.newInstance(plugin);
-                SasCommandBase base =( SasCommandBase ) object;
-				commands.put( base.getCommand(), base );
-				plugin.getLogger().info( base+"|"+base.getCommand() );
-				plugin.getCommand( base.getCommand( ) ).setExecutor( base );
-                plugin.pluginManager.registerEvents( base, plugin );
-			} catch ( Exception e) {
-				e.printStackTrace();
-			}
+//        register(new SasClear(plugin));
+        register(new SasPing(plugin));
+        register(new SasVanish(plugin));
+        register(new SasWhoIs(plugin));
+        register(new SasWild(plugin));
+    }
+
+    private void register(SasCommandBase sasCommandBase) {
+        commands.put(sasCommandBase.getCommand(), sasCommandBase);
+        plugin.getPluginManager().registerEvents(sasCommandBase, plugin);
+        for (String command : sasCommandBase.getCommands()) {
+            plugin.getCommand(command).setExecutor(sasCommandBase);
         }
-	}
+    }
 }

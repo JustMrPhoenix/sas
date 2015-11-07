@@ -28,13 +28,13 @@ import java.util.List;
 import java.util.Map;
 
 public class SasVanish extends SasCommandBase implements TabCompleter {
+	Essentials essentials;
 	private List<String> inVanish = new ArrayList<String>();
 	private Map<Player, Block> inventories = new HashMap<Player, Block>();
-	Essentials essentials;
 
 	public SasVanish(SasPlugin plugin) {
         super(plugin, "sasvanish");
-		this.essentials = plugin.essentials;
+		this.essentials = plugin.getEssentials();
 	}
 
 	public void hide(Player ply) {

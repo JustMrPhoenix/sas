@@ -15,7 +15,8 @@ import java.util.Objects;
 
 public abstract class SasCommandBase implements CommandExecutor, TabCompleter, Listener {
     protected SasPlugin plugin;
-    protected List<String> commands = new ArrayList<String>();
+    // TODO: Refactor using org.bukkit.command.Command instead of String
+    protected List<String> commands = new ArrayList<>();
 
     public SasCommandBase(SasPlugin plugin, List<String> commands) {
         this.plugin = plugin;

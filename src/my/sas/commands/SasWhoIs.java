@@ -63,7 +63,7 @@ public class SasWhoIs extends SasCommandBase {
 
         userInfo.addRow(new UserInfoRow("В муте: ", essUser.isMuted()));
 
-        userInfo.addRow(new UserInfoRow("В сас ванише: ", ((SasVanish) plugin.getSasCommandExecuter().commands.get("sasvanish")).inVanish(target)));
+        userInfo.addRow(new UserInfoRow("В сас ванише: ", ((SasVanish) plugin.getSasCommand("sasvanish")).inVanish(target)));
 
         userInfo.addRow(new UserInfoRow("Группы: ", StringUtils.join(plugin.getPermission().getPlayerGroups(target), ", ")));
         userInfo.addRow(new UserInfoRow("Пермишены: ", StringUtils.join(PermissionsEx.getUser(target).getAllPermissions().get(null), ", ")));

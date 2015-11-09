@@ -9,8 +9,9 @@ import java.util.HashMap;
 
 public class SasCommandExecutor {
 
-    public SasPlugin plugin;
-    public HashMap<String, SasCommandBase> commands = new HashMap<String, SasCommandBase>();
+    private SasPlugin plugin;
+    // TODO: Maybe use singleton pattern instead of HashMap?
+    private HashMap<String, SasCommandBase> commands = new HashMap<>();
 
     public SasCommandExecutor(SasPlugin plugin) {
         this.plugin = plugin;
@@ -28,5 +29,9 @@ public class SasCommandExecutor {
         for (String command : sasCommandBase.getCommands()) {
             plugin.getCommand(command).setExecutor(sasCommandBase);
         }
+    }
+
+    public SasCommandBase getSasCommand(String name) {
+        return commands.get(name);
     }
 }

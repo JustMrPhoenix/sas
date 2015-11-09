@@ -7,7 +7,7 @@ import org.bukkit.ChatColor;
 public class UserInfoRow {
     private String description;
 
-    private Boolean booleanValue;
+    private boolean booleanValue;
     private String stringValue;
 
     public UserInfoRow(String description, boolean value) {
@@ -20,18 +20,17 @@ public class UserInfoRow {
         this.stringValue = value;
     }
 
-    public String getStatusString() {
+    public String getInfoString() {
         String result = ChatColor.GOLD + description;
 
-        if (booleanValue != null) {
-            if (booleanValue) {
-                result = result + ChatColor.DARK_GREEN + RussianMessage.YES;
-            } else {
-                result = result + ChatColor.DARK_RED + RussianMessage.NO;
-            }
-        }
         if (stringValue != null) {
-            result = result + ChatColor.WHITE + stringValue;
+            result += ChatColor.WHITE + stringValue;
+        } else {
+            if (booleanValue) {
+                result += ChatColor.DARK_GREEN + RussianMessage.YES;
+            } else {
+                result += ChatColor.DARK_RED + RussianMessage.NO;
+            }
         }
 
         return result;
@@ -39,6 +38,6 @@ public class UserInfoRow {
 
     @Override
     public String toString() {
-        return this.getStatusString();
+        return this.getInfoString();
     }
 }

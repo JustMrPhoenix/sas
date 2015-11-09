@@ -56,6 +56,12 @@ public class SasPlugin extends JavaPlugin implements Listener {
         getLogger().info("SAS plugin deactivated");
     }
 
+    public SasCommandBase getSasCommand(String name) {
+        return sasCommandExecuter.getSasCommand(name);
+    }
+
+    //region generated getters and setters
+
     public SasConfig getDataBaseConfig() {
         return dataBaseConfig;
     }
@@ -72,9 +78,6 @@ public class SasPlugin extends JavaPlugin implements Listener {
         return itemHandler;
     }
 
-    public SasCommandExecutor getSasCommandExecuter() {
-        return sasCommandExecuter;
-    }
 
     public AntiGodKill getAntiGodKill() {
         return antiGodKill;
@@ -99,5 +102,7 @@ public class SasPlugin extends JavaPlugin implements Listener {
     public PluginManager getPluginManager() {
         return pluginManager;
     }
+
+    //endregion
 
 }

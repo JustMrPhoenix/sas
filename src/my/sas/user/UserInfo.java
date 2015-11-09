@@ -9,22 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserInfo {
-    private List<UserInfoRow> statusRows = new ArrayList<>();
+    private List<UserInfoRow> infoRows = new ArrayList<>();
 
     public void addRow(UserInfoRow row) {
-        statusRows.add(row);
-    }
-
-    public List<UserInfoRow> getStatusRows() {
-        return statusRows;
+        infoRows.add(row);
     }
 
     public void send(CommandSender receiver) {
         List<String> messageLines = new ArrayList<>();
 
         messageLines.add(ChatColor.YELLOW + "=== SAS СТАТУС ИГРОКА ===");
-        for (UserInfoRow statusRow : statusRows) {
-            messageLines.add(statusRow.getStatusString());
+        for (UserInfoRow infoRow : infoRows) {
+            messageLines.add(infoRow.getInfoString());
         }
 
         if (receiver instanceof Player) {

@@ -16,7 +16,6 @@ public class SasPlugin extends JavaPlugin implements Listener {
     private FileConfiguration config;
     private PluginManager pluginManager;
     private KitExecutor kitExecutor;
-    private InvKeeper invKeeper;
     private ItemHandler itemHandler;
     private SasCommandExecutor sasCommandExecuter;
     private AntiGodKill antiGodKill;
@@ -36,12 +35,10 @@ public class SasPlugin extends JavaPlugin implements Listener {
         permissionsEx = (PermissionsEx) pluginManager.getPlugin("PermissionsEx");
         permission = VaultUtil.getPermissionsProvider();
         kitExecutor = new KitExecutor(this);
-        invKeeper = new InvKeeper();
         itemHandler = new ItemHandler(this, this.getClassLoader());
         sasCommandExecuter = new SasCommandExecutor(this);
         antiGodKill = new AntiGodKill(essentials);
         pluginManager.registerEvents(this, this);
-        pluginManager.registerEvents(invKeeper, this);
         pluginManager.registerEvents(kitExecutor, this);
         pluginManager.registerEvents(itemHandler, this);
         pluginManager.registerEvents(antiGodKill, this);
@@ -68,10 +65,6 @@ public class SasPlugin extends JavaPlugin implements Listener {
 
     public KitExecutor getKitExecutor() {
         return kitExecutor;
-    }
-
-    public InvKeeper getInvKeeper() {
-        return invKeeper;
     }
 
     public ItemHandler getItemHandler() {

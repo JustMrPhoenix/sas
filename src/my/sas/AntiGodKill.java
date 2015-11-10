@@ -38,6 +38,9 @@ public class AntiGodKill implements Listener {
 	private Integer warn(Player ply) {
 		ply.sendMessage(ChatColor.RED + "Вы находитесь в режиме бога/креативе/полёте!");
 		Integer i = warns.get(ply);
+		if (i == null) {
+			i = 1;
+		}
 		if (i >= 30) {
 			ply.kickPlayer("Многочисленные попытки ударить игрока находясь в режиме бога/креативе/полёте!");
 		} else {

@@ -5,6 +5,7 @@ import my.sas.SasCommandBase;
 import my.sas.SasPlugin;
 import my.sas.user.UserInfo;
 import my.sas.user.UserInfoRow;
+import my.sas.util.LocationUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -42,8 +43,7 @@ public class SasWhoIs extends SasCommandBase {
 
         userInfo.addRow(new UserInfoRow("Уровень: ", target.getExp() + "(уровень " + target.getLevel() + " )"));
 
-        // TODO: Make output readable
-        userInfo.addRow(new UserInfoRow("Местоположение: ", target.getLocation().toString()));
+        userInfo.addRow(new UserInfoRow("Местоположение: ", LocationUtil.format(target.getLocation())));
 
         userInfo.addRow(new UserInfoRow("Баланс: ", essUser.getMoney().toString()));
 
@@ -64,6 +64,8 @@ public class SasWhoIs extends SasCommandBase {
         userInfo.addRow(new UserInfoRow("В муте: ", essUser.isMuted()));
 
         userInfo.addRow(new UserInfoRow("В сас ванише: ", ((SasVanish) plugin.getSasCommand("sasvanish")).inVanish(target)));
+
+        // TODO: Add auth me support
 
         userInfo.addRow(new UserInfoRow("Группы: ", StringUtils.join(plugin.getPermission().getPlayerGroups(target), ", ")));
         userInfo.addRow(new UserInfoRow("Пермишены: ", StringUtils.join(PermissionsEx.getUser(target).getAllPermissions().get(null), ", ")));

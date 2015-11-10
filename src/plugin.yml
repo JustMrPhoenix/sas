@@ -1,7 +1,7 @@
 name: SAS
 main: my.sas.SasPlugin
 version: 1.5
-description: sas
+description: Adds multiple utility features
 commands:
    sas:
       description: Display pugin info

@@ -6,6 +6,7 @@ import my.sas.SasPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.command.Command;
@@ -22,15 +23,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SasVanish extends SasCommandBase implements TabCompleter {
 	Essentials essentials;
-	private List<String> inVanish = new ArrayList<String>();
-	private Map<Player, Block> inventories = new HashMap<Player, Block>();
+    private Set<OfflinePlayer> inVanish = new HashSet<>();
+    private Map<Player, Block> inventories = new HashMap<Player, Block>();
 
 	public SasVanish(SasPlugin plugin) {
         super(plugin, "sasvanish");
@@ -68,8 +66,8 @@ public class SasVanish extends SasCommandBase implements TabCompleter {
 		if (inVanish.contains(nick)) {
 			return true;
 		}
-		inVanish.add(nick);
-		Player ply = plugin.getServer().getPlayer(nick);
+        inVanish.add(Bukkit.getOfflinePlayer(nick));
+        Player ply = plugin.getServer().getPlayer(nick);
 		plugin.getLogger().info(nick + " is now in sasvanish");
 		if (ply != null) {
 			hide(ply);
@@ -81,8 +79,8 @@ public class SasVanish extends SasCommandBase implements TabCompleter {
 		if (inVanish(ply)) {
 			return true;
 		}
-		inVanish.add(ply.getName());
-		hide(ply);
+        inVanish.add(Bukkit.getOfflinePlayer(ply.getUniqueId()));
+        hide(ply);
 		return false;
 	}
 
@@ -112,8 +110,8 @@ public class SasVanish extends SasCommandBase implements TabCompleter {
 	}
 
 	public boolean inVanish(Player ply) {
-		return inVanish.contains(ply.getName());
-	}
+        return inVanish.contains(Bukkit.getOfflinePlayer(ply.getUniqueId()));
+    }
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {

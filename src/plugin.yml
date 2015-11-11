@@ -1,6 +1,7 @@
 name: SAS
 main: my.sas.SasPlugin
 version: 1.5
+authors: [MrPhoenix, ReFruity]
 description: Adds multiple utility features
 commands:
    sas:

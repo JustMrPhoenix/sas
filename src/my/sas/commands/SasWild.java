@@ -12,66 +12,63 @@ import org.bukkit.entity.Player;
 import java.util.Random;
 
 public class SasWild extends SasCommandBase {
-	public WorldGuardPlugin wg;
+    private WorldGuardPlugin worldGuard;
 
-	public SasWild(SasPlugin plugin) {
-		super(plugin, "wild");
-		this.wg = plugin.getWorldGuard();
-	}
+    public SasWild(SasPlugin plugin) {
+        super(plugin, "wild");
+        this.worldGuard = plugin.getWorldGuard();
+    }
 
-	public boolean checkLocation( Location loc)
-	{
-		if (loc.getBlock().getType() != Material.AIR && loc.getBlock().getType() != null) {
-			return false;
-		}
-		return true;
-	}
+    public boolean checkLocation(Location location) {
+        return location.getBlock().getType() == null || location.getBlock().getType() == Material.AIR;
+    }
 
-	public Location getRandomLocation( World world, Point min, Point max ){
-		Random Xrand = new Random();
-		int x = Xrand.nextInt(max.getX() - min.getX()) + min.getX();
-		Random Zrand = new Random();
-		int z = Zrand.nextInt(max.getY() - min.getY()) + min.getY();
-		int y = Bukkit.getServer().getWorld("world").getHighestBlockYAt(( int )x, (int) z);
-		Location loc = new Location( world, x, y, z);
-		return loc;
-	}
+    public Location getRandomLocation(World world, Point min, Point max) {
+        Random random = new Random();
 
-	private void tpToRandomPos( Player player, int try_number){
-		if( try_number >= 10 ){
-			player.sendMessage( ChatColor.RED+"Достигнуто максимальное количество попыток!");
-			return;
-		}
-		Location spawn = Bukkit.getServer().getWorld("world").getSpawnLocation();
-		int spawn_x = spawn.getBlockX();
-		int spawn_z = spawn.getBlockZ();
-		Point min = new Point( spawn_x-6000, spawn_z-6000 );
-		Point max = new Point( spawn_x+6000, spawn_z+6000 );
-		Location loc = getRandomLocation( player.getWorld(), min, max );
-		Chunk c = loc.getChunk();
-		boolean loaded = c.isLoaded();
-		if( !loaded ){
-			c.load();
-		}
-		if ( !checkLocation(loc) || !wg.canBuild( player, loc ) || spawn.distance( loc ) < 1500 ) {
-			player.sendMessage(ChatColor.RED + "Безопасное место для телепорта не найдено. Пробуем ещё раз...");
-			tpToRandomPos(player, try_number +1);
-			if( !loaded ){
-				c.unload();
-			}
-		}else {
-			player.teleport(loc);
-			player.sendMessage(ChatColor.DARK_AQUA + "Телерортирование на: X: " + ChatColor.GOLD + loc.getX() + ChatColor.DARK_AQUA + " Z: " + ChatColor.GOLD + loc.getZ());
-		}
-	}
+        int x = random.nextInt(max.getX() - min.getX()) + min.getX();
+        int z = random.nextInt(max.getY() - min.getY()) + min.getY();
 
-	public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
-		if( !( commandSender instanceof Player ) ){
-			plugin.getLogger().warning( "RLY?" );
-			return true;
-		}
-		Player player = ( Player ) commandSender;
-		tpToRandomPos( player, 0 );
-		return true;
-	}
+        int y = Bukkit.getServer().getWorld("world").getHighestBlockYAt(x, z);
+
+        return new Location(world, x, y, z);
+    }
+
+    private void tpToRandomPos(Player player, int iteration) {
+        if (iteration >= 10) {
+            player.sendMessage(ChatColor.RED + "Достигнуто максимальное количество попыток!");
+            return;
+        }
+        Location spawn = Bukkit.getServer().getWorld("world").getSpawnLocation();
+        int spawn_x = spawn.getBlockX();
+        int spawn_z = spawn.getBlockZ();
+        Point min = new Point(spawn_x - 6000, spawn_z - 6000);
+        Point max = new Point(spawn_x + 6000, spawn_z + 6000);
+        Location loc = getRandomLocation(player.getWorld(), min, max);
+        Chunk c = loc.getChunk();
+        boolean loaded = c.isLoaded();
+        if (!loaded) {
+            c.load();
+        }
+        if (!checkLocation(loc) || !worldGuard.canBuild(player, loc) || spawn.distance(loc) < 1500) {
+            player.sendMessage(ChatColor.RED + "Безопасное место для телепорта не найдено. Пробуем ещё раз...");
+            tpToRandomPos(player, iteration + 1);
+            if (!loaded) {
+                c.unload();
+            }
+        } else {
+            player.teleport(loc);
+            player.sendMessage(ChatColor.DARK_AQUA + "Телерортирование на: X: " + ChatColor.GOLD + loc.getX() + ChatColor.DARK_AQUA + " Z: " + ChatColor.GOLD + loc.getZ());
+        }
+    }
+
+    public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
+        if (!(commandSender instanceof Player)) {
+            plugin.getLogger().warning("RLY?");
+            return true;
+        }
+        Player player = (Player) commandSender;
+        tpToRandomPos(player, 0);
+        return true;
+    }
 }

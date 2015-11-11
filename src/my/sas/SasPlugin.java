@@ -5,11 +5,11 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import my.sas.kit.KitExecutor;
 import my.sas.util.VaultUtil;
 import net.milkbowl.vault.permission.Permission;
-import ninja.leaping.permissionsex.PermissionsEx;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class SasPlugin extends JavaPlugin implements Listener {
     private SasConfig dataBaseConfig;

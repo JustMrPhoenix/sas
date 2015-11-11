@@ -1,6 +1,7 @@
 package my.sas.user;
 
 import com.google.common.base.Strings;
+import my.sas.message.EnglishMessage;
 import my.sas.message.RussianMessage;
 import org.bukkit.ChatColor;
 
@@ -27,9 +28,9 @@ public class UserInfoRow {
             result += ChatColor.WHITE + stringValue;
         } else {
             if (booleanValue) {
-                result += ChatColor.DARK_GREEN + RussianMessage.YES;
+                result += ChatColor.DARK_GREEN + EnglishMessage.YES;
             } else {
-                result += ChatColor.DARK_RED + RussianMessage.NO;
+                result += ChatColor.DARK_RED + EnglishMessage.NO;
             }
         }
 

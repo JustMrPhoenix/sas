@@ -37,38 +37,38 @@ public class SasWhoIs extends SasCommandBase {
         UserInfo userInfo = new UserInfo();
         User essUser = plugin.getEssentials().getUser(target);
 
-        userInfo.addRow(new UserInfoRow("Ник: ", target.getName()));
+        userInfo.addRow(new UserInfoRow("Nickname: ", target.getName()));
 
-        userInfo.addRow(new UserInfoRow("Здоровье: ", target.getHealth() + "/" + target.getMaxHealth() + " ( +" + target.getFoodLevel() + " насыщение )"));
+        userInfo.addRow(new UserInfoRow("Health: ", target.getHealth() + "/" + target.getMaxHealth() + " ( +" + target.getFoodLevel() + " food level )"));
 
-        userInfo.addRow(new UserInfoRow("Уровень: ", target.getExp() + "(уровень " + target.getLevel() + " )"));
+        userInfo.addRow(new UserInfoRow("Experience: ", target.getExp() + "(level " + target.getLevel() + " )"));
 
-        userInfo.addRow(new UserInfoRow("Местоположение: ", LocationUtil.format(target.getLocation())));
+        userInfo.addRow(new UserInfoRow("Location: ", LocationUtil.format(target.getLocation())));
 
-        userInfo.addRow(new UserInfoRow("Баланс: ", essUser.getMoney().toString()));
+        userInfo.addRow(new UserInfoRow("Money: ", essUser.getMoney().toString()));
 
         userInfo.addRow(new UserInfoRow("IP: ", target.getAddress().toString()));
 
-        userInfo.addRow(new UserInfoRow("Игровой режим: ", target.getGameMode().name()));
+        userInfo.addRow(new UserInfoRow("Game Mode: ", target.getGameMode().name()));
 
-        userInfo.addRow(new UserInfoRow("В режиме бога: ", essUser.isGodModeEnabled()));
+        userInfo.addRow(new UserInfoRow("Is God: ", essUser.isGodModeEnabled()));
 
-        userInfo.addRow(new UserInfoRow("OP: ", target.isOp()));
+        userInfo.addRow(new UserInfoRow("Is OP: ", target.isOp()));
 
-        userInfo.addRow(new UserInfoRow("Летает: ", target.isFlying()));
+        userInfo.addRow(new UserInfoRow("Is Flying: ", target.isFlying()));
 
-        userInfo.addRow(new UserInfoRow("AFK: ", essUser.isAfk()));
+        userInfo.addRow(new UserInfoRow("Is AFK: ", essUser.isAfk()));
 
-        userInfo.addRow(new UserInfoRow("В тюрьме: ", essUser.isJailed()));
+        userInfo.addRow(new UserInfoRow("Is In Jail: ", essUser.isJailed()));
 
-        userInfo.addRow(new UserInfoRow("В муте: ", essUser.isMuted()));
+        userInfo.addRow(new UserInfoRow("Is Muted: ", essUser.isMuted()));
 
-        userInfo.addRow(new UserInfoRow("В сас ванише: ", ((SasVanish) plugin.getSasCommand("sasvanish")).inVanish(target)));
+        userInfo.addRow(new UserInfoRow("Is In SasVanish: ", ((SasVanish) plugin.getSasCommand("sasvanish")).inVanish(target)));
 
         // TODO: Add auth me support
 
-        userInfo.addRow(new UserInfoRow("Группы: ", StringUtils.join(plugin.getPermission().getPlayerGroups(target), ", ")));
-        userInfo.addRow(new UserInfoRow("Пермишены: ", StringUtils.join(PermissionsEx.getUser(target).getAllPermissions().get(null), ", ")));
+        userInfo.addRow(new UserInfoRow("Groups: ", StringUtils.join(plugin.getPermission().getPlayerGroups(target), ", ")));
+        userInfo.addRow(new UserInfoRow("Permissions: ", StringUtils.join(PermissionsEx.getUser(target).getAllPermissions().get(null), ", ")));
 
         userInfo.send(commandSender);
     }

@@ -18,7 +18,7 @@ public class UserInfo {
     public void send(CommandSender receiver) {
         List<String> messageLines = new ArrayList<>();
 
-        messageLines.add(ChatColor.YELLOW + "=== SAS СТАТУС ИГРОКА ===");
+        messageLines.add(ChatColor.YELLOW + "=== SAS PLAYER STATUS ===");
         for (UserInfoRow infoRow : infoRows) {
             messageLines.add(infoRow.getInfoString());
         }

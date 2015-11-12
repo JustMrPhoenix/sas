@@ -32,7 +32,7 @@ public class ItemHandler implements Listener {
         ClassPath path = null;
         try {
             path = ClassPath.from(loader);
-            for (ClassPath.ClassInfo info : path.getTopLevelClassesRecursive("main.java.mrphoenix.sas.items")) {
+            for (ClassPath.ClassInfo info : path.getTopLevelClassesRecursive("mrphoenix.sas.items")) {
                 Class<?> clazz = null;
                 clazz = Class.forName(info.getName(), true, loader);
                 Constructor<?> c = clazz.getConstructor(String.class);

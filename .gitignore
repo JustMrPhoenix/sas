@@ -1,5 +1,6 @@
-/out
-/sas.iml
-/.gitattributes
-/.idea
-/libs
+.idea/
+out/
+libs/
+target/
+
+.gitattributes

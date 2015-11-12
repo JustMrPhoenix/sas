@@ -3,7 +3,7 @@ package my.sas.commands;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import my.sas.SasCommandBase;
 import my.sas.SasPlugin;
-import my.sas.geom.PointInteger;
+import my.sas.geom.Point;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -21,7 +21,7 @@ public class SasWild extends SasCommandBase {
 
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
         if (!(commandSender instanceof Player)) {
-            plugin.getLogger().warning("RLY?");
+            plugin.getLogger().warning("Only in-game players can use /wild.");
             return true;
         }
         Player player = (Player) commandSender;
@@ -37,8 +37,8 @@ public class SasWild extends SasCommandBase {
         Location spawn = Bukkit.getServer().getWorld("world").getSpawnLocation();
         int spawn_x = spawn.getBlockX();
         int spawn_z = spawn.getBlockZ();
-        PointInteger min = new PointInteger(spawn_x - 6000, spawn_z - 6000);
-        PointInteger max = new PointInteger(spawn_x + 6000, spawn_z + 6000);
+        Point min = new Point(spawn_x - 6000, spawn_z - 6000);
+        Point max = new Point(spawn_x + 6000, spawn_z + 6000);
         Location loc = getRandomLocation(player.getWorld(), min, max);
         Chunk c = loc.getChunk();
         boolean loaded = c.isLoaded();
@@ -57,11 +57,11 @@ public class SasWild extends SasCommandBase {
         }
     }
 
-    public static Location getRandomLocation(World world, PointInteger min, PointInteger max) {
+    public static Location getRandomLocation(World world, Point min, Point max) {
         Random random = new Random();
 
-        int x = random.nextInt(max.getX() - min.getX()) + min.getX();
-        int z = random.nextInt(max.getY() - min.getY()) + min.getY();
+        int x = random.nextInt(max.getIntX() - min.getIntX()) + min.getIntX();
+        int z = random.nextInt(max.getIntY() - min.getIntY()) + min.getIntY();
         int y = Bukkit.getServer().getWorld("world").getHighestBlockYAt(x, z);
 
         return new Location(world, x, y, z);

@@ -1,32 +1,29 @@
 package my.sas.geom;
 
 public class Disk {
-    private PointDouble center;
+    private Point center;
 
-    private double innerRadius;
+    private double innerRadius, outerRadius;
 
-    private double outerRadius;
-
-    public Disk(PointDouble center, double innerRadius, double outerRadius) {
+    public Disk(Point center, double innerRadius, double outerRadius) {
         this.center = center;
         this.innerRadius = innerRadius;
         this.outerRadius = outerRadius;
     }
 
-    public PointInteger getRandomPointInteger() {
-        double angle = Math.random();
-        double radius = Math.random();
-        Vector radiusVector;
-        return null;
+    public Point getRandomPoint() {
+        Circle circle = new Circle(center, outerRadius - innerRadius);
+        double randomAngle = Math.random();
+        return Point.createFrom(randomAngle, circle.getRandomRadiusUniform() + innerRadius).add(new Vector(center));
     }
 
     //region generated getters and setters
 
-    public PointDouble getCenter() {
+    public Point getCenter() {
         return center;
     }
 
-    public void setCenter(PointDouble center) {
+    public void setCenter(Point center) {
         this.center = center;
     }
 

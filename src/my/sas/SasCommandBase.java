@@ -1,7 +1,9 @@
 package my.sas;
 
 import my.sas.util.CollectionUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,6 +19,7 @@ public abstract class SasCommandBase implements CommandExecutor, TabCompleter, L
     protected SasPlugin plugin;
     // TODO: Refactor using org.bukkit.command.Command instead of String
     protected List<String> commands = new ArrayList<>();
+    protected World defaultWorld = Bukkit.getWorld("world");
 
     public SasCommandBase(SasPlugin plugin, List<String> commands) {
         this.plugin = plugin;

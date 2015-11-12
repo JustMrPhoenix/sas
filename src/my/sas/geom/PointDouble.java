@@ -1,11 +1,19 @@
 package my.sas.geom;
 
-public class Point {
+public class PointDouble {
     private double x, y;
 
-    public Point(double x, double y) {
+    public PointDouble(double x, double y) {
         this.x = x;
         this.y = y;
+    }
+
+    public PointDouble add(Vector v) {
+        return new PointDouble(v.getX() + this.x, v.getY() + this.y);
+    }
+
+    public PointInteger toPointInteger() {
+        return new PointInteger((int)this.x, (int)this.y);
     }
 
     //region generated getters and setters

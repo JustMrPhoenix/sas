@@ -8,6 +8,14 @@ public class PointInteger {
         this.y = y;
     }
 
+    public PointInteger add(Vector v) {
+        return this.toPointDouble().add(v).toPointInteger();
+    }
+
+    public PointDouble toPointDouble() {
+        return new PointDouble(this.x, this.y);
+    }
+
     //region generated getters and setters
 
     public int getX() {

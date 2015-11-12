@@ -1,15 +1,13 @@
 package my.sas.geom;
 
-import my.sas.geom.PointInteger;
-
 public class Disk {
-    private PointInteger center;
+    private PointDouble center;
 
     private double innerRadius;
 
     private double outerRadius;
 
-    public Disk(PointInteger center, double innerRadius, double outerRadius) {
+    public Disk(PointDouble center, double innerRadius, double outerRadius) {
         this.center = center;
         this.innerRadius = innerRadius;
         this.outerRadius = outerRadius;
@@ -17,16 +15,18 @@ public class Disk {
 
     public PointInteger getRandomPointInteger() {
         double angle = Math.random();
+        double radius = Math.random();
+        Vector radiusVector;
         return null;
     }
 
     //region generated getters and setters
 
-    public PointInteger getCenter() {
+    public PointDouble getCenter() {
         return center;
     }
 
-    public void setCenter(PointInteger center) {
+    public void setCenter(PointDouble center) {
         this.center = center;
     }
 

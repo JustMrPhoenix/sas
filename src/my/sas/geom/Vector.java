@@ -8,6 +8,10 @@ public class Vector {
         this.y = y;
     }
 
+    public Vector multiply(double scalar) {
+        return new Vector(scalar * this.x, scalar * this.y);
+    }
+
     //region generated getters and setters
 
     public double getX() {

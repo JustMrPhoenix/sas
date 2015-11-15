@@ -1,5 +1,7 @@
 package mrphoenix.sas.geom;
 
+import mrphoenix.sas.util.MathUtil;
+
 public class Vector {
     private double x, y;
 
@@ -20,6 +22,15 @@ public class Vector {
 
     public Vector multiply(double scalar) {
         return new Vector(scalar * this.x, scalar * this.y);
+    }
+
+    public double multiply(Vector vector) {
+        return this.x * vector.x + this.y * vector.y;
+    }
+
+    public double getLength() {
+        //noinspection SuspiciousNameCombination
+        return Math.sqrt(MathUtil.square(this.x) + MathUtil.square(this.y));
     }
 
     //region generated getters and setters

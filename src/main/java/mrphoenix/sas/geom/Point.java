@@ -1,5 +1,7 @@
 package mrphoenix.sas.geom;
 
+import mrphoenix.sas.util.MathUtil;
+
 public class Point {
     private double x, y;
 
@@ -18,12 +20,28 @@ public class Point {
         this.y = y;
     }
 
-    public static Point createFrom(double angle, double radius) {
-        return new Point(radius * Math.cos(angle), radius * Math.sin(angle));
+    public static Point createFrom(Angle angle, double radius) {
+        return Point.createFrom(angle.getRadians(), radius);
+    }
+
+    public static Point createFrom(double angleRadians, double radius) {
+        return new Point(radius * Math.cos(angleRadians), radius * Math.sin(angleRadians));
     }
 
     public Point add(Vector v) {
         return new Point(this.x + v.getX(), this.y + v.getY());
+    }
+
+    public Vector subtract(Point p) {
+        return new Vector(this.x - p.x, this.y - p.y);
+    }
+
+    public double distanceTo(Point p) {
+        return Math.sqrt(this.squareDistanceTo(p));
+    }
+
+    public double squareDistanceTo(Point p) {
+        return MathUtil.square(p.x - this.x) + MathUtil.square(p.y - this.y);
     }
 
     //region integer getters and setters
@@ -65,4 +83,10 @@ public class Point {
     }
 
     //endregion
+
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Point && ((Point) obj).x == this.x && ((Point) obj).y == this.y;
+    }
 }

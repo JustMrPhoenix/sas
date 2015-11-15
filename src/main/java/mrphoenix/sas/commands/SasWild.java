@@ -31,13 +31,14 @@ public class SasWild extends SasCommandBase {
     }
 
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
-        if (!(commandSender instanceof Player)) {
+        if (commandSender instanceof Player) {
+            Player player = (Player) commandSender;
+            tryTeleportToWild(player, defaultWorld);
+            return true;
+        } else {
             plugin.getLogger().warning("Only in-game players can use /wild.");
             return true;
         }
-        Player player = (Player) commandSender;
-        tryTeleportToWild(player, defaultWorld);
-        return true;
     }
 
     private void tryTeleportToWild(Player player, World world) {

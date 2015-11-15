@@ -1,6 +1,8 @@
 package mrphoenix.sas.geom;
 
-public class Circle {
+import java.util.Random;
+
+public class Circle implements Shape {
     private Point center;
 
     private double radius;
@@ -15,21 +17,32 @@ public class Circle {
         this.radius = radius;
     }
 
-    public Point getRandomPoint() {
-        double randomAngle = Math.random();
-        return Point.createFrom(randomAngle, this.getRandomRadiusUniform()).add(new Vector(center));
-    }
-
-    public double getRandomRadiusUniform() {
-        double randomSum = radius * (Math.random() + Math.random());
-        return randomSum > radius / 2 ? 2 * radius - randomSum : randomSum;
-    }
-
-    //region generated getters and setters
-
+    @Override
     public Point getCenter() {
         return center;
     }
+
+    @Override
+    public Point getRandomPoint() {
+        return null;
+    }
+
+    @Override
+    public Point getRandomPoint(Random random) {
+        Angle randomAngle = Angle.createRandom();
+        return Point.createFrom(randomAngle, this.getRandomRadiusUniform(random)).add(new Vector(center));
+    }
+
+    public double getRandomRadiusUniform() {
+        return this.getRandomRadiusUniform(new Random());
+    }
+
+    public double getRandomRadiusUniform(Random random) {
+        double randomSum = radius * (random.nextDouble() + random.nextDouble());
+        return randomSum > radius ? 2 * radius - randomSum : randomSum;
+    }
+
+    //region generated getters and setters
 
     public void setCenter(Point center) {
         this.center = center;

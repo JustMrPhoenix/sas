@@ -3,8 +3,6 @@ package mrphoenix.sas.commands;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import mrphoenix.sas.SasCommandBase;
 import mrphoenix.sas.SasPlugin;
-import refruity.math.geom.shape.Disk;
-import refruity.math.geom.shape.Point;
 import mrphoenix.sas.util.LocationUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -12,6 +10,10 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import refruity.math.geom.algo.DistributionAlgorithm;
+import refruity.math.geom.algo.UniformDistributionAlgorithm;
+import refruity.math.geom.shape.Disk;
+import refruity.math.geom.shape.Point;
 
 public class SasWild extends SasCommandBase {
     private static final int MAX_ITERATIONS = 10;
@@ -20,6 +22,8 @@ public class SasWild extends SasCommandBase {
 
     private WorldGuardPlugin worldGuard;
     private Disk spawnDisk;
+    private DistributionAlgorithm distributionAlgorithm;
+
 
     public SasWild(SasPlugin plugin) {
         super(plugin, "wild");
@@ -28,6 +32,8 @@ public class SasWild extends SasCommandBase {
 
         Point spawn = LocationUtil.toPoint(defaultWorld.getSpawnLocation());
         this.spawnDisk = new Disk(spawn, MIN_RADIUS, MAX_RADIUS);
+
+        this.distributionAlgorithm = new UniformDistributionAlgorithm();
     }
 
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
@@ -43,7 +49,7 @@ public class SasWild extends SasCommandBase {
 
     private void tryTeleportToWild(Player player, World world) {
         for (int i = 0; i < MAX_ITERATIONS; i++) {
-            Point randomSpawnDiskPoint = spawnDisk.getRandomPoint();
+            Point randomSpawnDiskPoint = distributionAlgorithm.getRandomPoint(spawnDisk);
             Location highestLocation = LocationUtil.getHighestLocation(world, randomSpawnDiskPoint);
 
             if (LocationUtil.isSafe(highestLocation)) {

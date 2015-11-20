@@ -3,4 +3,5 @@ out/
 libs/
 target/
 
+.class
 .gitattributes

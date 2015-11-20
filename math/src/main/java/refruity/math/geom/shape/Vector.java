@@ -20,6 +20,14 @@ public class Vector {
         this.y = p.getY();
     }
 
+    public double length() {
+        return Math.sqrt(this.squareLength());
+    }
+
+    public double squareLength() {
+        return x*x + y*y;
+    }
+
     public Vector multiply(double scalar) {
         return new Vector(scalar * this.x, scalar * this.y);
     }

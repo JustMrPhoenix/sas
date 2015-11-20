@@ -2,8 +2,6 @@ package refruity.math.geom.shape;
 
 import org.junit.Assert;
 import org.junit.Test;
-import refruity.math.geom.shape.Angle;
-import refruity.math.geom.shape.Vector;
 
 import static java.lang.Math.PI;
 
@@ -11,7 +9,7 @@ public class AngleTest {
     private static final double EPSILON = 10E-13;
 
     @Test
-    public void testCreateFrom() throws Exception {
+    public void testCreateFrom() {
         Vector zeroVector = new Vector();
         Angle fromZeroVector = Angle.createFrom(zeroVector);
         Assert.assertEquals(Double.NaN, fromZeroVector.getRadians(), EPSILON);
@@ -34,7 +32,7 @@ public class AngleTest {
     }
 
     @Test
-    public void testGetSector() throws Exception {
+    public void testGetSector() {
         Angle zeroAngle = new Angle();
         Assert.assertEquals(Angle.Sector.TOP_RIGHT, zeroAngle.getSector());
 
@@ -52,7 +50,7 @@ public class AngleTest {
     }
 
     @Test
-    public void testNormalizeRadians() throws Exception {
+    public void testNormalizeRadians() {
         Angle zeroAngle = new Angle();
         Assert.assertEquals(0, zeroAngle.normalizeRadians(), EPSILON);
 

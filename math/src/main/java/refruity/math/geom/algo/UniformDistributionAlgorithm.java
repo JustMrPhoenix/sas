@@ -26,6 +26,16 @@ public class UniformDistributionAlgorithm extends DistributionAlgorithm {
     }
 
     private Point getRandomDiskPoint(Disk disk) {
-        return null;
+        Point center = disk.getCenter();
+        double outerRadius = disk.getOuterRadius();
+        double innerRadius = disk.getInnerRadius();
+
+        double radiusDelta = outerRadius - innerRadius;
+        double randomSum = radiusDelta * (randomGenerator.nextDouble() + randomGenerator.nextDouble());
+        double uniformRadius = randomSum > radiusDelta ? 2 * radiusDelta - randomSum : randomSum;
+
+        Angle randomAngle = Angle.createRandom(randomGenerator);
+
+        return Point.createFrom(randomAngle, uniformRadius + innerRadius).add(new Vector(center));
     }
 }

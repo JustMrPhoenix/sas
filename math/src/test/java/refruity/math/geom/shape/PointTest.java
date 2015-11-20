@@ -1,15 +1,13 @@
 package refruity.math.geom.shape;
 
-import org.junit.Test;
 import org.junit.Assert;
-import refruity.math.geom.shape.Point;
-import refruity.math.geom.shape.Vector;
+import org.junit.Test;
 
 public class PointTest {
     private static final double EPSILON = 10E-15;
 
     @Test
-    public void testCreateFrom() throws Exception {
+    public void testCreateFrom() {
         Point zero = Point.createFrom(0, 0);
         Assert.assertEquals(new Point(), zero);
 
@@ -23,7 +21,7 @@ public class PointTest {
     }
 
     @Test
-    public void testAdd() throws Exception {
+    public void testAdd() {
         Vector nonZeroVector = new Vector(0.5, 0.5);
 
         Point zeroPoint = new Point();

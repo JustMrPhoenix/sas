@@ -5,6 +5,6 @@ import org.junit.Test;
 
 public class SasWildTest {
     @Test
-    public void testLocation() throws Exception {
+    public void testLocation() {
     }
 }

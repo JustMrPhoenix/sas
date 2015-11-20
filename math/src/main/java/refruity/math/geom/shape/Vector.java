@@ -1,4 +1,4 @@
-package refruity.math.geom;
+package refruity.math.geom.shape;
 
 import mrphoenix.sas.util.MathUtil;
 

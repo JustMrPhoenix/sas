@@ -1,8 +1,10 @@
-package refruity.math.geom;
+package refruity.math.geom.shape;
 
 import mrphoenix.sas.util.MathUtil;
 import org.junit.Assert;
 import org.junit.Test;
+import refruity.math.geom.shape.Circle;
+import refruity.math.geom.shape.Point;
 
 import java.util.Random;
 

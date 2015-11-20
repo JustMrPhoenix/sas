@@ -1,6 +1,6 @@
 package mrphoenix.sas.util;
 
-import refruity.math.geom.Point;
+import refruity.math.geom.shape.Point;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;

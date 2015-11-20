@@ -1,4 +1,4 @@
-package refruity.math.geom;
+package refruity.math.geom.shape;
 
 import mrphoenix.sas.util.MathUtil;
 
@@ -21,7 +21,7 @@ public class Point {
     }
 
     public static Point createFrom(Angle angle, double radius) {
-        return Point.createFrom(angle.getRadians(), radius);
+        return createFrom(angle.getRadians(), radius);
     }
 
     public static Point createFrom(double angleRadians, double radius) {

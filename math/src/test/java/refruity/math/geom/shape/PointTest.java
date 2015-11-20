@@ -1,7 +1,9 @@
-package refruity.math.geom;
+package refruity.math.geom.shape;
 
 import org.junit.Test;
 import org.junit.Assert;
+import refruity.math.geom.shape.Point;
+import refruity.math.geom.shape.Vector;
 
 public class PointTest {
     private static final double EPSILON = 10E-15;

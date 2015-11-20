@@ -1,7 +1,9 @@
-package refruity.math.geom;
+package refruity.math.geom.shape;
 
 import org.junit.Assert;
 import org.junit.Test;
+import refruity.math.geom.shape.Angle;
+import refruity.math.geom.shape.Vector;
 
 import static java.lang.Math.PI;
 

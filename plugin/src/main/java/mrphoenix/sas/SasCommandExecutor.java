@@ -29,6 +29,7 @@ public class SasCommandExecutor {
         for (String command : sasCommandBase.getCommands()) {
             plugin.getCommand(command).setExecutor(sasCommandBase);
         }
+        plugin.getLogger().info(sasCommandBase.toString() + "|" + sasCommandBase.getCommand());
     }
 
     public SasCommandBase getSasCommand(String name) {
